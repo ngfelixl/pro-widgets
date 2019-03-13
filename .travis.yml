@@ -5,7 +5,8 @@ install:
  - npm install
 script:
  - npm run build
+ - npm run lint
  - npm run test
 
  # Send coverage data to Coveralls
- # after_script: npm run coverage
+after_script: npm run coverage
