@@ -1,7 +1,11 @@
 <app-titlebar></app-titlebar>
 
 <mat-toolbar class="mat-elevation-z4" color="primary" *ngIf="subtitle">
-  <button mat-icon-button *ngIf="(displayIcon | async) === 'over'" (click)="openSidenav()">
+  <button
+    mat-icon-button
+    *ngIf="(displayIcon | async) === 'over'"
+    (click)="openSidenav()"
+  >
     <mat-icon>menu</mat-icon>
   </button>
   {{ subtitle }}

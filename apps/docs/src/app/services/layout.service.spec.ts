@@ -5,7 +5,9 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 class MockBreakpointObserver {
-  private state: BehaviorSubject<BreakpointState> = new BehaviorSubject(undefined);
+  private state: BehaviorSubject<BreakpointState> = new BehaviorSubject(
+    undefined
+  );
 
   resize(size: number) {
     this.state.next({ matches: size >= 700 ? true : false, breakpoints: {} });
@@ -22,7 +24,10 @@ describe('LayoutService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [LayoutService, { provide: BreakpointObserver, useClass: MockBreakpointObserver }]
+      providers: [
+        LayoutService,
+        { provide: BreakpointObserver, useClass: MockBreakpointObserver }
+      ]
     });
     service = TestBed.get(LayoutService);
     breakpointObserver = TestBed.get(BreakpointObserver);

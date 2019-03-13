@@ -37,7 +37,14 @@ class LayoutMockService {
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AppComponent, MatToolbarComponent, AppTitlebarComponent, AppSidenavComponent, MatIconButtonDirective, MatIconComponent],
+      declarations: [
+        AppComponent,
+        MatToolbarComponent,
+        AppTitlebarComponent,
+        AppSidenavComponent,
+        MatIconButtonDirective,
+        MatIconComponent
+      ],
       imports: [RouterTestingModule],
       providers: [
         { provide: LayoutService, useClass: LayoutMockService },

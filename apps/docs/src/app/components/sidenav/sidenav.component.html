@@ -1,9 +1,13 @@
 <mat-sidenav-container
-  *ngIf="!(hideSidenav$ | async); else hiddenSidenav"
+  *ngIf="!(hideSidenav$ | async); else: hiddenSidenav"
   class="container"
   (backdropClick)="backdropClick($event)"
 >
-  <mat-sidenav [mode]="sidenavMode | async" [opened]="(sidenavOpen | async) || (disableClose | async)" class="sidenav">
+  <mat-sidenav
+    [mode]="sidenavMode | async"
+    [opened]="(sidenavOpen | async) || (disableClose | async)"
+    class="sidenav"
+  >
     <app-nav-list></app-nav-list>
   </mat-sidenav>
 
@@ -12,6 +16,4 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-<ng-template #hiddenSidenav>
-  <router-outlet></router-outlet>
-</ng-template>
+<ng-template #hiddenSidenav> <router-outlet></router-outlet> </ng-template>

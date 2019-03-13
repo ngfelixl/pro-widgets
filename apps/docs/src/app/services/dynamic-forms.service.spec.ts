@@ -29,6 +29,10 @@ describe('DynamicFormsService', () => {
   it('should throw an error if input is not an array', () => {
     expect(() => {
       service.createFromList('hello world' as any);
-    }).toThrowError(new RegExp('DynamicFormsService: create form from list requires an array of strings'));
+    }).toThrowError(
+      new RegExp(
+        'DynamicFormsService: create form from list requires an array of strings'
+      )
+    );
   });
 });

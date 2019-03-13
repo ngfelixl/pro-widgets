@@ -10,7 +10,12 @@ export const digitalGauge: Widget = {
   tabs: [
     {
       label: 'Colors',
-      fields: ['defaultColor', 'normalColor', 'backgroundColor', 'outerBackgroundColor']
+      fields: [
+        'defaultColor',
+        'normalColor',
+        'backgroundColor',
+        'outerBackgroundColor'
+      ]
     },
     {
       label: 'Thresholds',

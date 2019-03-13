@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  ChangeDetectorRef
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -20,7 +25,10 @@ export class AnalogStickComponent {
   private xOffset = 0.1 * 283.46;
   private size = [283.46 - 0.1 * 283.46, 283.46 - 0.1 * 283.46];
 
-  constructor(public changeDetectorRef: ChangeDetectorRef, private domSanitizer: DomSanitizer) {}
+  constructor(
+    public changeDetectorRef: ChangeDetectorRef,
+    private domSanitizer: DomSanitizer
+  ) {}
 
   get xPercentage() {
     return (this.value[0] - this.min[0]) / this.max[0];
@@ -31,19 +39,27 @@ export class AnalogStickComponent {
   }
 
   get gradientColor() {
-    return this.domSanitizer.bypassSecurityTrustStyle(`stop-color: ${this.color}`);
+    return this.domSanitizer.bypassSecurityTrustStyle(
+      `stop-color: ${this.color}`
+    );
   }
 
   get backgroundGradientStartColor() {
-    return this.domSanitizer.bypassSecurityTrustStyle(`stop-color: ${this.gradientStartColor}`);
+    return this.domSanitizer.bypassSecurityTrustStyle(
+      `stop-color: ${this.gradientStartColor}`
+    );
   }
 
   get backgroundGradientEndColor() {
-    return this.domSanitizer.bypassSecurityTrustStyle(`stop-color: ${this.gradientEndColor}`);
+    return this.domSanitizer.bypassSecurityTrustStyle(
+      `stop-color: ${this.gradientEndColor}`
+    );
   }
 
   get gradientBase() {
-    return this.domSanitizer.bypassSecurityTrustStyle(`stop-color: ${this.gradientBaseColor}`);
+    return this.domSanitizer.bypassSecurityTrustStyle(
+      `stop-color: ${this.gradientBaseColor}`
+    );
   }
 
   get xRoundedPercentage() {

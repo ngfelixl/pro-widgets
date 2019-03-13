@@ -11,7 +11,10 @@ import { RouteDataService } from '@docs/app/services/route-data.service';
 export class SidenavComponent {
   hideSidenav$: Observable<boolean>;
 
-  constructor(private routeData: RouteDataService, private layoutService: LayoutService) {
+  constructor(
+    private routeData: RouteDataService,
+    private layoutService: LayoutService
+  ) {
     this.hideSidenav$ = this.routeData.hideSidenav$;
   }
 

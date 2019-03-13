@@ -1,4 +1,10 @@
-import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+  tick,
+  fakeAsync
+} from '@angular/core/testing';
 
 import { WidgetComponent } from './widget.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -9,8 +15,7 @@ import { BehaviorSubject } from 'rxjs';
 import { skip } from 'rxjs/operators';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { widgets } from '../../data/widgets/index';
-import { Component, Directive, Input, ChangeDetectorRef } from "@angular/core";
-
+import { Component, Directive, Input, ChangeDetectorRef } from '@angular/core';
 
 // tslint:disable-next-line:component-selector
 @Component({ selector: 'pro-gauge', template: '' })
@@ -18,13 +23,15 @@ export class GaugeComponent {
   constructor(private changeDetectorRef: ChangeDetectorRef) {}
 }
 
-
 // tslint:disable-next-line:directive-selector
 @Directive({ selector: 'matInput' })
 export class MatInputDirective {}
 
-// tslint:disable-next-line:component-selector
-@Component({ selector: 'mat-form-field', template: '<ng-content></ng-content>' })
+@Component({
+  // tslint:disable-next-line:component-selector
+  selector: 'mat-form-field',
+  template: '<ng-content></ng-content>'
+})
 export class MatFormFieldComponent {}
 
 // tslint:disable-next-line:component-selector
@@ -49,11 +56,12 @@ export class MatTabComponent {
   @Input() label: string;
 }
 
-// tslint:disable-next-line:component-selector
-@Component({ selector: 'page-not-found', template: '<span id="page-not-found"></span>' })
+@Component({
+  // tslint:disable-next-line:component-selector
+  selector: 'page-not-found',
+  template: '<span id="page-not-found"></span>'
+})
 export class PageNotFoundComponent {}
-
-
 
 widgets.gauge.component = GaugeComponent;
 
@@ -64,7 +72,7 @@ const routes = [
 
 const mockChangeDetectorRef = {
   detectChanges: jest.fn()
-}
+};
 
 class MockActivatedRoute {
   state = new BehaviorSubject<any>({ id: null });
@@ -97,7 +105,11 @@ describe('WidgetComponent', () => {
         WidgetHostDirective,
         MatInputDirective
       ],
-      imports: [FormsModule, ReactiveFormsModule, RouterTestingModule.withRoutes(routes)],
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        RouterTestingModule.withRoutes(routes)
+      ],
       providers: [
         { provide: ActivatedRoute, useClass: MockActivatedRoute },
         { provide: ChangeDetectorRef, useValue: mockChangeDetectorRef }

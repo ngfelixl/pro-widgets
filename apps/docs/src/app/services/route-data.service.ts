@@ -13,11 +13,18 @@ export class RouteDataService {
   constructor(private router: Router, private route: ActivatedRoute) {
     this.title$ = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
-      map(() => this.route.firstChild && this.route.firstChild.snapshot.data.subtitle)
+      map(
+        () =>
+          this.route.firstChild && this.route.firstChild.snapshot.data.subtitle
+      )
     );
     this.hideSidenav$ = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
-      map(() => this.route.firstChild && this.route.firstChild.snapshot.data.hideSidenav)
+      map(
+        () =>
+          this.route.firstChild &&
+          this.route.firstChild.snapshot.data.hideSidenav
+      )
     );
   }
 }

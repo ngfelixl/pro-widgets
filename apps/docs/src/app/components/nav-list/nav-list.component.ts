@@ -14,7 +14,10 @@ export class NavListComponent implements OnInit {
   constructor(private layoutService: LayoutService) {}
 
   ngOnInit() {
-    this.widgets = Object.entries(widgets).map(entry => ({ id: entry[0], name: entry[1].name }));
+    this.widgets = Object.entries(widgets).map(entry => ({
+      id: entry[0],
+      name: entry[1].name
+    }));
   }
 
   closeSidenav() {

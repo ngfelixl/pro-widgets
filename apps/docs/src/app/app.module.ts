@@ -5,7 +5,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
-import { ProModule, GaugeComponent, DigitalGaugeComponent, AnalogStickComponent } from '@pro-widgets';
+import {
+  ProModule,
+  GaugeComponent,
+  DigitalGaugeComponent,
+  AnalogStickComponent
+} from '@pro-widgets';
 import { AppRoutingModule } from './app-routing.module';
 import { components } from './components';
 import { MatModule } from './mat.module';
@@ -22,7 +27,9 @@ import { AppComponent } from './app.component';
     ReactiveFormsModule,
     AppRoutingModule,
     MatModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production
+    })
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,4 +1,3 @@
-
 export * from './lib/analog-stick/analog-stick.module';
 export * from './lib/analog-stick/analog-stick.component';
 

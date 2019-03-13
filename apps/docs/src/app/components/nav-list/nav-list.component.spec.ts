@@ -1,17 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavListComponent } from './nav-list.component';
+import { NavListComponent as NavList } from './nav-list.component';
 import { Component } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
+// tslint:disable-next-line:component-selector
 @Component({ selector: 'mat-nav-list', template: '<ng-content></ng-content>' })
-class NavList {}
+class NavListComponent {}
 
+// tslint:disable-next-line:component-selector
 @Component({ selector: 'mat-list-item', template: '<ng-content></ng-content>' })
-class ListItem {}
+class ListItemComponent {}
 
+// tslint:disable-next-line:component-selector
 @Component({ selector: 'mat-divider', template: '' })
-class Divider {}
+class DividerComponent {}
 
 describe('NavListComponent', () => {
   let component: NavListComponent;
@@ -19,7 +22,12 @@ describe('NavListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NavListComponent, NavList, ListItem, Divider],
+      declarations: [
+        NavListComponent,
+        NavList,
+        ListItemComponent,
+        DividerComponent
+      ],
       imports: [RouterTestingModule]
     }).compileComponents();
   }));

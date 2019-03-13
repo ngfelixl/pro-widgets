@@ -7,7 +7,10 @@ export const analogStick: Widget = {
   dataFieldName: 'value',
   valueGenerator: () => {
     const angle = new Date().getTime() / 800;
-    return [Math.round((Math.sin(angle) * 30 + 50) * 100) / 100, Math.round((Math.cos(angle) * 40 + 50) * 100) / 100];
+    return [
+      Math.round((Math.sin(angle) * 30 + 50) * 100) / 100,
+      Math.round((Math.cos(angle) * 40 + 50) * 100) / 100
+    ];
   },
   module: 'AnalogStickModule',
   tabs: [

@@ -9,9 +9,21 @@ import { WidgetComponent } from './components/widget/widget.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, data: { hideSidenav: true } },
-  { path: 'installation', component: InstallationComponent, data: { subtitle: 'Installation' } },
-  { path: 'contributing', component: ContributingComponent, data: { subtitle: 'Contributing' } },
-  { path: 'widgets/:id', component: WidgetComponent, data: { subtitle: 'Customizer' } },
+  {
+    path: 'installation',
+    component: InstallationComponent,
+    data: { subtitle: 'Installation' }
+  },
+  {
+    path: 'contributing',
+    component: ContributingComponent,
+    data: { subtitle: 'Contributing' }
+  },
+  {
+    path: 'widgets/:id',
+    component: WidgetComponent,
+    data: { subtitle: 'Customizer' }
+  },
   { path: 'page-not-found', component: PageNotFoundComponent },
   { path: '**', redirectTo: '/page-not-found' }
 ];

@@ -12,10 +12,15 @@ export class AppComponent implements OnInit, OnDestroy {
   subtitle: string;
   subscription: Subscription;
 
-  constructor(private titleService: RouteDataService, private layoutService: LayoutService) {}
+  constructor(
+    private titleService: RouteDataService,
+    private layoutService: LayoutService
+  ) {}
 
   ngOnInit() {
-    this.subscription = this.titleService.title$.subscribe(title => (this.subtitle = title));
+    this.subscription = this.titleService.title$.subscribe(
+      title => (this.subtitle = title)
+    );
   }
 
   get displayIcon() {

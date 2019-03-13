@@ -22,16 +22,18 @@ export class HomeComponent implements OnInit, OnDestroy {
       }, 1000);
     });
 
-    this.analogStickValue$ = Observable.create((observer: Observer<[number, number]>) => {
-      this.analogStickInterval = window.setInterval(() => {
-        const angle = new Date().getTime() / 800;
-        const position: [number, number] = [
-          Math.round((Math.sin(angle) * 30 + 50) * 100) / 100,
-          Math.round((Math.cos(angle) * 40 + 50) * 100) / 100
-        ];
-        observer.next(position);
-      }, 30);
-    }).pipe(startWith([50, 50]));
+    this.analogStickValue$ = Observable.create(
+      (observer: Observer<[number, number]>) => {
+        this.analogStickInterval = window.setInterval(() => {
+          const angle = new Date().getTime() / 800;
+          const position: [number, number] = [
+            Math.round((Math.sin(angle) * 30 + 50) * 100) / 100,
+            Math.round((Math.cos(angle) * 40 + 50) * 100) / 100
+          ];
+          observer.next(position);
+        }, 30);
+      }
+    ).pipe(startWith([50, 50]));
   }
 
   ngOnDestroy() {

@@ -45,35 +45,41 @@ export class WidgetComponent implements OnInit, OnDestroy {
     private router: Router
   ) {
     this.form = new FormGroup({});
-    this.routerSubscription = this.route.params.pipe(map(p => p.id)).subscribe(id => {
-      this.destroySubscriptions();
-      this.form = new FormGroup({});
+    this.routerSubscription = this.route.params
+      .pipe(map(p => p.id))
+      .subscribe(id => {
+        this.destroySubscriptions();
+        this.form = new FormGroup({});
 
-      this.id = id;
-      this.widget = widgets[id];
-      if (this.widget) {
-        this.themes = themes[id];
-        this.form = this.createForm(this.widget.tabs);
-        this.form.patchValue(this.themes[0]);
-        this.loadComponent();
+        this.id = id;
+        this.widget = widgets[id];
+        if (this.widget) {
+          this.themes = themes[id];
+          this.form = this.createForm(this.widget.tabs);
+          this.form.patchValue(this.themes[0]);
+          this.loadComponent();
 
-        this.formSubscription = this.form.valueChanges.pipe(debounceTime(100)).subscribe(() => {
-          this.applyStyles();
-        });
+          this.formSubscription = this.form.valueChanges
+            .pipe(debounceTime(100))
+            .subscribe(() => {
+              this.applyStyles();
+            });
 
-        this.value$ = this.valueGenerator;
+          this.value$ = this.valueGenerator;
 
-        this.valueSubscription = this.value$.subscribe((data: number | number[]) => {
-          this.componentRef.instance.value = data;
-          if (this.componentRef.instance.ngOnChanges) {
-            this.componentRef.instance.ngOnChanges();
-          }
-          this.componentRef.instance.changeDetectorRef.detectChanges();
-        });
-      } else {
-        this.router.navigate(['/page-not-found']);
-      }
-    });
+          this.valueSubscription = this.value$.subscribe(
+            (data: number | number[]) => {
+              this.componentRef.instance.value = data;
+              if (this.componentRef.instance.ngOnChanges) {
+                this.componentRef.instance.ngOnChanges();
+              }
+              this.componentRef.instance.changeDetectorRef.detectChanges();
+            }
+          );
+        } else {
+          this.router.navigate(['/page-not-found']);
+        }
+      });
   }
 
   get valueGenerator(): Observable<number | number[]> {
@@ -85,7 +91,10 @@ export class WidgetComponent implements OnInit, OnDestroy {
   }
 
   private createForm(tabs: Tab[]) {
-    const flattedFields = tabs.reduce((acc: string[], cur: Tab) => [...acc, ...cur.fields], []);
+    const flattedFields = tabs.reduce(
+      (acc: string[], cur: Tab) => [...acc, ...cur.fields],
+      []
+    );
     return this.dynamicForms.createFromList(flattedFields);
   }
 
@@ -99,10 +108,14 @@ export class WidgetComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.widget.component);
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
+      this.widget.component
+    );
     if (this.viewContainerRef) {
       this.viewContainerRef.clear();
-      this.componentRef = this.viewContainerRef.createComponent(componentFactory);
+      this.componentRef = this.viewContainerRef.createComponent(
+        componentFactory
+      );
       this.applyStyles();
     }
   }

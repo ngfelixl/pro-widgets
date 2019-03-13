@@ -66,4 +66,3 @@ Software developer and Angular, NgRX contributor
 
 If you like this library, think about giving it a star or follow me on twitter or github or check out my personal
 the [website](https://felixlemke.com).
-

@@ -12,21 +12,23 @@ export class LayoutService {
   disableClose$ = new BehaviorSubject<boolean>(true);
 
   constructor(private breakpointObserver: BreakpointObserver) {
-    this.sidenavMode$ = this.breakpointObserver.observe('(min-width: 700px)').pipe(
-      map(breakpointState => (breakpointState.matches ? 'side' : 'over')),
-      tap((mode: string) => {
-        switch (mode) {
-          case 'over':
-            this.sidenavOpen$.next(false);
-            this.disableClose$.next(false);
-            break;
-          default:
-            this.sidenavOpen$.next(true);
-            this.disableClose$.next(true);
-            break;
-        }
-      })
-    );
+    this.sidenavMode$ = this.breakpointObserver
+      .observe('(min-width: 700px)')
+      .pipe(
+        map(breakpointState => (breakpointState.matches ? 'side' : 'over')),
+        tap((mode: string) => {
+          switch (mode) {
+            case 'over':
+              this.sidenavOpen$.next(false);
+              this.disableClose$.next(false);
+              break;
+            default:
+              this.sidenavOpen$.next(true);
+              this.disableClose$.next(true);
+              break;
+          }
+        })
+      );
   }
 
   openSidenav() {

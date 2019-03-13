@@ -13,11 +13,22 @@
     <rect y="0" [attr.fill]="sideColor" width="283.465" height="283.46" />
   </g>
   <g id="static">
-    <radialGradient id="prostickgradient1" cx="155.9063" cy="127.5591" r="127.5588" gradientUnits="userSpaceOnUse">
+    <radialGradient
+      id="prostickgradient1"
+      cx="155.9063"
+      cy="127.5591"
+      r="127.5588"
+      gradientUnits="userSpaceOnUse"
+    >
       <stop offset="0" [style]="backgroundGradientStartColor" />
       <stop offset="1" [style]="backgroundGradientEndColor" />
     </radialGradient>
-    <rect x="28.347" fill="url(#prostickgradient1)" width="255.118" height="255.118" />
+    <rect
+      x="28.347"
+      fill="url(#prostickgradient1)"
+      width="255.118"
+      height="255.118"
+    />
     <line
       [attr.stroke]="gradientEndColor"
       stroke-width="1"
@@ -36,7 +47,12 @@
       x2="283.46"
       y2="127.559"
     />
-    <circle [attr.fill]="gradientBaseColor" cx="155.906" cy="127.559" r="2.834" />
+    <circle
+      [attr.fill]="gradientBaseColor"
+      cx="155.906"
+      cy="127.559"
+      r="2.834"
+    />
   </g>
   <g id="dynamic">
     <polyline
@@ -71,7 +87,14 @@
       [attr.y2]="yPosition"
     />
 
-    <linearGradient id="prostickgradient3" gradientUnits="userSpaceOnUse" x1="92.126" y1="255.1172" x2="92.126" y2="0">
+    <linearGradient
+      id="prostickgradient3"
+      gradientUnits="userSpaceOnUse"
+      x1="92.126"
+      y1="255.1172"
+      x2="92.126"
+      y2="0"
+    >
       <stop offset="0" [style]="gradientBase" />
       <stop [attr.offset]="yPercentage" [style]="gradientColor" />
       <stop offset="1" [style]="gradientBase" />
@@ -107,7 +130,13 @@
       [attr.x2]="xPosition"
       [attr.y2]="yPosition"
     />
-    <circle id="circle-pointer" [attr.fill]="color" [attr.cx]="xPosition" [attr.cy]="yPosition" r="2.834" />
+    <circle
+      id="circle-pointer"
+      [attr.fill]="color"
+      [attr.cx]="xPosition"
+      [attr.cy]="yPosition"
+      r="2.834"
+    />
     <line
       id="x-pointer"
       fill="none"

@@ -1,4 +1,11 @@
-import { Component, ChangeDetectionStrategy, Input, OnChanges, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  OnChanges,
+  ChangeDetectorRef,
+  OnDestroy
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -20,7 +27,10 @@ export class GaugeComponent implements OnChanges, OnDestroy {
   private actualValue = this.min;
   private interval: number;
 
-  constructor(public changeDetectorRef: ChangeDetectorRef, private domSanitizer: DomSanitizer) {}
+  constructor(
+    public changeDetectorRef: ChangeDetectorRef,
+    private domSanitizer: DomSanitizer
+  ) {}
   private rangeOfCircle = (225 / 360) * Math.PI * 2;
   private offset = (157.5 / 360) * Math.PI * 2;
   private center = [141.732, 141.732];
@@ -51,11 +61,15 @@ export class GaugeComponent implements OnChanges, OnDestroy {
   }
 
   get gradientBackgroundColor() {
-    return this.domSanitizer.bypassSecurityTrustStyle(`stop-color:${this.backgroundColor}`);
+    return this.domSanitizer.bypassSecurityTrustStyle(
+      `stop-color:${this.backgroundColor}`
+    );
   }
 
   get gradientStripeColor() {
-    return this.domSanitizer.bypassSecurityTrustStyle(`stop-color:${this.stripeColor}`);
+    return this.domSanitizer.bypassSecurityTrustStyle(
+      `stop-color:${this.stripeColor}`
+    );
   }
 
   get roundedValue() {
@@ -66,8 +80,12 @@ export class GaugeComponent implements OnChanges, OnDestroy {
     const minOffset = (this.min / this.range) * this.rangeOfCircle;
     const alpha = (this.actualValue / this.range) * this.rangeOfCircle;
 
-    const x = Math.cos(this.offset + alpha - minOffset) * this.pointerLength + this.center[0];
-    const y = Math.sin(this.offset + alpha - minOffset) * this.pointerLength + this.center[1];
+    const x =
+      Math.cos(this.offset + alpha - minOffset) * this.pointerLength +
+      this.center[0];
+    const y =
+      Math.sin(this.offset + alpha - minOffset) * this.pointerLength +
+      this.center[1];
 
     return [x, y];
   }

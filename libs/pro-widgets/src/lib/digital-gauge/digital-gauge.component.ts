@@ -41,7 +41,10 @@ export class DigitalGaugeComponent implements OnChanges, AfterViewInit {
   };
   private viewInit = false;
 
-  constructor(public changeDetectorRef: ChangeDetectorRef, private domSanitizer: DomSanitizer) {}
+  constructor(
+    public changeDetectorRef: ChangeDetectorRef,
+    private domSanitizer: DomSanitizer
+  ) {}
 
   ngOnChanges() {
     this.checkStyleChange();
@@ -49,7 +52,9 @@ export class DigitalGaugeComponent implements OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.stripes = this.stripeContainer.nativeElement.getElementsByTagName('line');
+    this.stripes = this.stripeContainer.nativeElement.getElementsByTagName(
+      'line'
+    );
     let value = Math.round(this.stripes.length * this.percentageValue);
     value = Math.max(0, value);
     value = Math.min(this.stripes.length - 1, value);
@@ -65,15 +70,21 @@ export class DigitalGaugeComponent implements OnChanges, AfterViewInit {
   }
 
   get gradientUnderlineColor() {
-    return this.domSanitizer.bypassSecurityTrustStyle(`stop-color:${this.underlineColor}`);
+    return this.domSanitizer.bypassSecurityTrustStyle(
+      `stop-color:${this.underlineColor}`
+    );
   }
 
   get gradientOuterColor() {
-    return this.domSanitizer.bypassSecurityTrustStyle(`stop-color:${this.outerBackgroundColor}`);
+    return this.domSanitizer.bypassSecurityTrustStyle(
+      `stop-color:${this.outerBackgroundColor}`
+    );
   }
 
   get gradientInnerColor() {
-    return this.domSanitizer.bypassSecurityTrustStyle(`stop-color:${this.backgroundColor}`);
+    return this.domSanitizer.bypassSecurityTrustStyle(
+      `stop-color:${this.backgroundColor}`
+    );
   }
 
   get percentageValue() {
@@ -113,7 +124,11 @@ export class DigitalGaugeComponent implements OnChanges, AfterViewInit {
 
       if (difference !== 0) {
         const delta = difference > 0 ? 1 : -1;
-        for (let i = this.lastValue; i * delta <= value * delta; i = i + delta) {
+        for (
+          let i = this.lastValue;
+          i * delta <= value * delta;
+          i = i + delta
+        ) {
           const index = this.stripes.length - 1 - i;
           if (delta > 0) {
             this.setActiveStrokeColor(i);
