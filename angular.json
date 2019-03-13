@@ -83,6 +83,8 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "serviceWorker": true,
+              "deployUrl": "https://ngfelixl.github.io/pro-widgets/",
+              "baseHref": "./",
               "budgets": [
                 {
                   "type": "initial",
