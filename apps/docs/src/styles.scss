@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+@import './theme.scss';
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.code {
+  border-radius: 4px;
+  padding: 24px;
+  background-color: mat-color($primary, 700);
+  font-family: monospace;
+  color: white;
+  overflow-y: auto;
+}
+
+a {
+  color: mat-color($accent);
+  text-decoration: none;
+}

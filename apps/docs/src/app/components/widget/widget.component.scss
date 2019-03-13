@@ -1,0 +1,33 @@
+:host {
+  display: block;
+  max-width: 1080px;
+  margin: auto;
+}
+
+.widget-host {
+  max-width: 300px;
+  margin-bottom: 16px;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.input-data {
+  width: 100%;
+  display: block;
+  padding: 8px;
+  box-sizing: border-box;
+  color: white;
+  border-radius: 4px;
+  max-width: 300px;
+  min-width: 200px;
+}
+
+mat-form-field,
+mat-tab-group {
+  width: 100%;
+}

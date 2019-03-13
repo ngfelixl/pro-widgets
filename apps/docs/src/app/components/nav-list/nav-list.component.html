@@ -1,0 +1,9 @@
+<mat-nav-list (click)="closeSidenav()">
+  <mat-list-item routerLink="/installation">Installation</mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item *ngFor="let widget of widgets" [routerLink]="['/widgets', widget.id]" routerLinkActive="active">
+    {{ widget.name }}
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item routerLink="/contributing">Contributing</mat-list-item>
+</mat-nav-list>

@@ -1,0 +1,172 @@
+<svg
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  x="0px"
+  y="0px"
+  width="100%"
+  height="100%"
+  viewBox="0 0 283.46 283.46"
+  enable-background="new 0 0 283.46 283.46"
+  xml:space="preserve"
+>
+  <g id="background">
+    <rect y="0" [attr.fill]="sideColor" width="283.465" height="283.46" />
+  </g>
+  <g id="static">
+    <radialGradient id="prostickgradient1" cx="155.9063" cy="127.5591" r="127.5588" gradientUnits="userSpaceOnUse">
+      <stop offset="0" [style]="backgroundGradientStartColor" />
+      <stop offset="1" [style]="backgroundGradientEndColor" />
+    </radialGradient>
+    <rect x="28.347" fill="url(#prostickgradient1)" width="255.118" height="255.118" />
+    <line
+      [attr.stroke]="gradientEndColor"
+      stroke-width="1"
+      stroke-miterlimit="10"
+      x1="155.906"
+      y1="0"
+      x2="155.906"
+      y2="255.118"
+    />
+    <line
+      [attr.stroke]="gradientEndColor"
+      stroke-width="1"
+      stroke-miterlimit="10"
+      x1="28.347"
+      y1="127.559"
+      x2="283.46"
+      y2="127.559"
+    />
+    <circle [attr.fill]="gradientBaseColor" cx="155.906" cy="127.559" r="2.834" />
+  </g>
+  <g id="dynamic">
+    <polyline
+      fill="none"
+      stroke="#878787"
+      stroke-width="2"
+      stroke-miterlimit="10"
+      attr.points="{{ xPosition }},255.118 28.347,255.118 
+			28.347,{{ yPosition }} 	"
+    />
+
+    <linearGradient
+      id="prostickgradient2"
+      gradientUnits="userSpaceOnUse"
+      x1="28.3467"
+      [attr.y1]="yPosition"
+      x2="283.4648"
+      [attr.y2]="yPosition"
+    >
+      <stop offset="0" [style]="gradientBase" />
+      <stop [attr.offset]="xPercentage" [style]="gradientColor" />
+      <stop offset="1" [style]="gradientBase" />
+    </linearGradient>
+    <line
+      fill="none"
+      stroke="url(#prostickgradient2)"
+      stroke-width="2"
+      stroke-miterlimit="10"
+      x1="283.465"
+      [attr.y1]="yPosition"
+      x2="28.347"
+      [attr.y2]="yPosition"
+    />
+
+    <linearGradient id="prostickgradient3" gradientUnits="userSpaceOnUse" x1="92.126" y1="255.1172" x2="92.126" y2="0">
+      <stop offset="0" [style]="gradientBase" />
+      <stop [attr.offset]="yPercentage" [style]="gradientColor" />
+      <stop offset="1" [style]="gradientBase" />
+    </linearGradient>
+    <line
+      fill="#5C5C5C"
+      stroke="url(#prostickgradient3)"
+      stroke-width="2"
+      stroke-miterlimit="10"
+      [attr.x1]="xPosition"
+      y1="255.117"
+      [attr.x2]="xPosition"
+      y2="0"
+    />
+
+    <linearGradient
+      id="prostickgradient4"
+      gradientUnits="userSpaceOnUse"
+      x1="155.906"
+      y1="127.559"
+      [attr.x2]="xPosition"
+      [attr.y2]="yPosition"
+    >
+      <stop offset="0" [style]="gradientBase" />
+      <stop offset="1" [style]="gradientColor" />
+    </linearGradient>
+    <line
+      stroke="url(#prostickgradient4)"
+      stroke-width="2"
+      stroke-miterlimit="10"
+      x1="155.906"
+      y1="127.559"
+      [attr.x2]="xPosition"
+      [attr.y2]="yPosition"
+    />
+    <circle id="circle-pointer" [attr.fill]="color" [attr.cx]="xPosition" [attr.cy]="yPosition" r="2.834" />
+    <line
+      id="x-pointer"
+      fill="none"
+      [attr.stroke]="gradientBaseColor"
+      stroke-width="2"
+      stroke-miterlimit="10"
+      [attr.x1]="xPosition"
+      y1="255.118"
+      [attr.x2]="xPosition"
+      y2="260.787"
+    />
+    <line
+      id="y-pointer"
+      fill="none"
+      [attr.stroke]="gradientBaseColor"
+      stroke-width="2"
+      stroke-miterlimit="10"
+      x1="28.347"
+      [attr.y1]="yPosition"
+      x2="22.677"
+      [attr.y2]="yPosition"
+    />
+  </g>
+  <g id="labels">
+    <text
+      transform="matrix(0 1 -1 0 7.2471 123)"
+      fill="#9D9D9C"
+      font-family="'Roboto-Regular', 'Arial'"
+      font-size="14"
+      text-anchor="middle"
+    >
+      {{ yLabel }}
+    </text>
+    <text
+      transform="matrix(1 0 0 1 152 276.2168)"
+      fill="#9D9D9C"
+      font-family="'Roboto-Regular', 'Arial'"
+      font-size="14"
+      text-anchor="middle"
+    >
+      {{ xLabel }}
+    </text>
+    <text
+      transform="matrix(0 1 -1 0 36.1777 220)"
+      fill="#706F6F"
+      font-family="'Roboto-Regular', 'Arial'"
+      font-size="12"
+      text-anchor="middle"
+    >
+      {{ yRoundedPercentage }}%
+    </text>
+    <text
+      transform="matrix(1 0 0 1 60 247.2861)"
+      fill="#706F6F"
+      font-family="'Roboto-Regular', 'Arial'"
+      font-size="12"
+      text-anchor="middle"
+    >
+      {{ xRoundedPercentage }}%
+    </text>
+  </g>
+</svg>

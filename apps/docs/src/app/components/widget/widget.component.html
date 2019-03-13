@@ -1,0 +1,39 @@
+<h2>{{ widget?.name }}</h2>
+<div class="flex">
+  <ng-template appWidgetHost class="widget-host"></ng-template>
+
+  <div class="container">
+    <div class="input-data mat-elevation-z1 dark-theme">
+      <b>{{ widget?.name }} input bindings</b><br />
+      value: {{ value$ | async | json }}<br /><br />
+      <mat-form-field color="accent">
+        <mat-select placeholder="Theme" [value]="themes && themes[0]" (selectionChange)="usePreset($event.value)">
+          <mat-option *ngFor="let theme of themes" [value]="theme">{{ theme.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <form [formGroup]="form">
+        <mat-tab-group mat-stretch-tabs color="accent">
+          <mat-tab *ngFor="let tab of widget?.tabs" [label]="tab.label">
+            <mat-form-field color="accent" *ngFor="let field of tab.fields">
+              <input matInput [placeholder]="field" autocomplete="off" [formControlName]="field" />
+            </mat-form-field>
+          </mat-tab>
+        </mat-tab-group>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div>
+  <h4>Import</h4>
+  <pre class="code mat-elevation-z1">import &#123; {{ widget?.module }} &#125; from 'pro-widgets'</pre>
+</div>
+
+<div>
+  <h4>Code</h4>
+  <pre class="code mat-elevation-z1">
+&lt;pro-{{ id }}{{ codeFromForm }}&gt;
+&lt;/pro-{{ id }}&gt;</pre
+  >
+</div>

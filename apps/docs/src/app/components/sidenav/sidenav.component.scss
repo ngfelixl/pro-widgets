@@ -1,0 +1,18 @@
+.container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #eee;
+}
+
+.content {
+  padding: 48px;
+  box-sizing: border-box;
+  color: #121212;
+}
+
+.sidenav {
+  min-width: 200px;
+}

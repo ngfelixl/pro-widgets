@@ -1,0 +1,74 @@
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$primary: mat-palette($mat-grey, 900);
+$accent: mat-palette($mat-pink, A200, A100, A400);
+$warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$theme: mat-dark-theme($primary, $accent, $warn);
+
+@function dark-theme-foreground($color, $secondary) {
+  @return (
+    base: $color,
+    divider: $white-12-opacity,
+    dividers: mat-color($secondary),
+    disabled: rgba($color, 0.38),
+    disabled-button: rgba($color, 0.38),
+    disabled-text: rgba($color, 0.38),
+    hint-text: mat-color($secondary),
+    secondary-text: mat-color($secondary),
+    icon: rgba($color, 0.54),
+    icons: rgba($color, 0.54),
+    text: rgba($color, 0.87),
+    slider-off: rgba($color, 0.26),
+    slider-off-active: rgba($color, 0.38),
+    slider-min: rgba($color, 0.38)
+  );
+}
+
+@function dark-theme-background($color) {
+  @return (
+    status-bar: $color,
+    app-bar: $color,
+    background: $color,
+    hover: $color,
+    card: $color,
+    dialog: $color,
+    disabled-button: $color,
+    raised-button: $color,
+    focused-button: $color,
+    selected-button: $color,
+    selected-disabled-button: $color,
+    disabled-button-toggle: $color,
+    unselected-chip: $color,
+    disabled-list-option: $color
+  );
+}
+
+// $white-foreground: dark-theme-foreground(white, $accent);
+// $white-background: dark-theme-background(white);
+$dark-theme: map-merge(
+  $theme,
+  (
+    foreground: $mat-dark-theme-foreground,
+    background: $mat-dark-theme-background
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($theme);
+
+.dark-theme {
+  background-color: mat-color($primary, 700);
+}

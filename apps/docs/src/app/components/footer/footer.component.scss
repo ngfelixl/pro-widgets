@@ -1,0 +1,26 @@
+@import '../../../theme.scss';
+
+:host {
+  display: block;
+  padding: 48px;
+  box-sizing: border-box;
+  background-color: mat-color($primary, 800);
+  color: mat-color($primary, 50);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1080px;
+  margin: auto;
+}
+
+.social {
+  img {
+    width: 70%;
+  }
+}
+
+.copyright {
+  text-align: right;
+}

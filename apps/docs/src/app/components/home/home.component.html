@@ -1,0 +1,42 @@
+<div class="jumbotron">
+  <span class="title">Angular Pro Widgets</span><br /><br />
+  <button mat-flat-button color="primary" routerLink="installation">Get Started</button>
+</div>
+
+<div class="preview">
+  <div class="entry first">
+    <div class="demo">
+      <pro-gauge
+        pointerColor="#f50057"
+        [value]="gaugeValue$ | async"
+        backgroundColor="#212121"
+        unit="m/s"
+        stripeColor="#868686"
+      ></pro-gauge>
+    </div>
+    <div class="description">
+      Highly customizable and responsive svg widgets for easy usage with Angular.
+      <p>
+        <a routerLink="/widgets/gauge">Test it yourself</a>
+      </p>
+    </div>
+  </div>
+  <div class="entry second">
+    <div class="description">
+      Feet the widgets simply with input property bindings and make use of Angulars async pipe for your data streams.
+      <br /><br />
+      More widgets comming soon.
+    </div>
+    <div class="demo">
+      <pro-analog-stick
+        color="#f50057"
+        [value]="analogStickValue$ | async"
+        yLabel="I Like"
+        xLabel="Pro Widgets"
+        sideColor="#424242"
+      ></pro-analog-stick>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

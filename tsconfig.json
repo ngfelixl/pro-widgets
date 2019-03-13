@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@pro-widgets": ["libs/pro-widgets/src/index.ts"],
+      "@docs": ["apps/docs/src"],
+      "@docs/*": ["apps/docs/src/*"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

@@ -1,0 +1,26 @@
+{
+  "name": "pro-widgets",
+  "version": "0.5.0",
+  "description": "Responsive animated Angular SVG widgets",
+  "author": "Felix Lemke <flemke.dev@gmail.com> (https://felixlemke.com)",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "widgets",
+    "iot",
+    "hmi",
+    "svg"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngfelixl/pro-widgets.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ngfelixl/pro-widgets/issues"
+  },
+  "homepage": "https://ngfelixl.github.io/pro-widgets",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0"
+  }
+}
