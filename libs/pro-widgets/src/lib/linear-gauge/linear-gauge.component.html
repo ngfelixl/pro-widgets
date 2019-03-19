@@ -6,8 +6,8 @@
   y="0px"
   width="100%"
   height="100%"
-  viewBox="0 0 283.46 56.69"
-  enable-background="new 0 0 283.46 56.69"
+  [attr.viewBox]="'0 0 283.46 ' + height"
+  [attr.enable-background]="'new 0 0 283.46 ' + height"
   xml:space="preserve"
 >
   <g id="ticks" #ticks [innerHTML]="safeTicks"></g>
@@ -16,9 +16,9 @@
       id="SVGID_1_"
       gradientUnits="userSpaceOnUse"
       [attr.x1]="backgroundPosX1"
-      y1="33.0693"
+      [attr.y1]="33.0693 + +marginTop"
       [attr.x2]="backgroundPosX2"
-      y2="33.0693"
+      [attr.y2]="33.0693 + +marginTop"
     >
       <stop offset="0" [style]="gradientStartSanitized" />
       <stop
@@ -29,7 +29,7 @@
     </linearGradient>
     <rect
       [attr.x]="backgroundPosX1"
-      y="29.525"
+      [attr.y]="29.525 + +marginTop"
       fill="url(#SVGID_1_)"
       [attr.width]="backgroundWidth"
       height="7.088"
@@ -41,27 +41,27 @@
       [attr.stroke]="strokeColor"
       stroke-miterlimit="10"
       x1="274.959"
-      y1="37.111"
+      [attr.y1]="37.111 + +marginTop"
       x2="274.959"
-      y2="22.439"
+      [attr.y2]="22.439 + +marginTop"
     />
     <line
       fill="none"
       [attr.stroke]="strokeColor"
       stroke-miterlimit="10"
       x1="8.501"
-      y1="37.106"
+      [attr.y1]="37.106 + +marginTop"
       x2="8.501"
-      y2="22.44"
+      [attr.y2]="22.44 + +marginTop"
     />
     <line
       fill="none"
       [attr.stroke]="strokeColor"
       stroke-miterlimit="10"
       x1="8.501"
-      y1="36.611"
+      [attr.y1]="36.611 + +marginTop"
       x2="274.959"
-      y2="36.611"
+      [attr.y2]="36.611 + +marginTop"
     />
   </g>
   <g id="indicator">
@@ -69,9 +69,9 @@
       id="SVGID_2_"
       gradientUnits="userSpaceOnUse"
       x1="97.687"
-      y1="36.6123"
+      [attr.y1]="36.6123 + +marginTop"
       x2="97.687"
-      y2="22.4395"
+      [attr.y2]="22.4395 + +marginTop"
     >
       <stop offset="0" [style]="indicatorBottomSanitized" />
       <stop offset="1" [style]="indicatorTopSanitized" />
@@ -83,7 +83,9 @@
   </g>
   <g id="labels">
     <text
-      [attr.transform]="'matrix(1 0 0 1 142 ' + (52.8184 + +marginBottom) + ')'"
+      [attr.transform]="
+        'matrix(1 0 0 1 142 ' + (52.8184 + +marginBottom + +marginTop) + ')'
+      "
       [attr.fill]="fontColor"
       font-family="'Roboto-Regular', sans-serif, Arial, Helvetica"
       font-size="18"
@@ -93,7 +95,7 @@
     </text>
     <text
       [attr.transform]="
-        'matrix(1 0 0 1 274.959 ' + (52.8174 + +marginBottom) + ')'
+        'matrix(1 0 0 1 274.959 ' + (52.8174 + +marginBottom + +marginTop) + ')'
       "
       [attr.fill]="fontColor"
       font-family="'Roboto-Regular', sans-serif, Arial, Helvetica"
@@ -104,7 +106,7 @@
     </text>
     <text
       [attr.transform]="
-        'matrix(1 0 0 1 8.5015 ' + (52.8174 + +marginBottom) + ')'
+        'matrix(1 0 0 1 8.5015 ' + (52.8174 + +marginBottom + +marginTop) + ')'
       "
       [attr.fill]="fontColor"
       font-family="'Roboto-Regular', sans-serif, Arial, Helvetica"
@@ -113,7 +115,7 @@
       {{ min }}
     </text>
     <text
-      [attr.transform]="'matrix(1 0 0 1 142 ' + (15.9448 - +marginTop) + ')'"
+      [attr.transform]="'matrix(1 0 0 1 142 ' + 15.9448 + ')'"
       [attr.fill]="fontColor"
       font-family="'Roboto-Regular', sans-serif, Arial, Helvetica"
       font-size="18"

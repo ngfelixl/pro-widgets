@@ -51,6 +51,7 @@ export class LinearGaugeComponent implements OnChanges, OnInit {
   backgroundWidth: number;
   backgroundPosX1: number;
   backgroundPosX2: number;
+  height = 56.69 + this.marginTop + this.marginBottom;
 
   constructor(
     private domSanitizer: DomSanitizer,
@@ -61,6 +62,7 @@ export class LinearGaugeComponent implements OnChanges, OnInit {
     this.calculateTicks();
     this.backgroundMin = this.min;
     this.backgroundMax = this.max;
+    this.height = 56.69 + +this.marginTop + +this.marginBottom;
   }
 
   ngOnChanges() {
@@ -69,6 +71,7 @@ export class LinearGaugeComponent implements OnChanges, OnInit {
       return;
     }
 
+    this.height = 56.69 + +this.marginTop + +this.marginBottom;
     this.calculateTicks();
     this.applyStyleChanges();
   }
@@ -106,7 +109,8 @@ export class LinearGaugeComponent implements OnChanges, OnInit {
       const position = this.boundary[0] + intersectionRange * (i + 1);
       htmlTicks += `<line stroke=${
         this.strokeColor
-      } stroke-miterlimit="10" fill="none" x1="${position}" y1="36.613" x2="${position}" y2="25.274"/>`;
+      } stroke-miterlimit="10" fill="none" x1="${position}" y1="${36.613 +
+        +this.marginTop}" x2="${position}" y2="${25.274 + +this.marginTop}"/>`;
     }
     this.safeTicks = this.domSanitizer.bypassSecurityTrustHtml(htmlTicks);
     this.storedTicks = this.ticks;
@@ -153,8 +157,9 @@ export class LinearGaugeComponent implements OnChanges, OnInit {
   }
 
   get displayValue() {
-    return `${this.pxValue},36.612 ${this.pxValue +
-      this.indicatorWidth / 2},22.439 ${this.pxValue -
-      this.indicatorWidth / 2},22.439`;
+    const top = +this.marginTop;
+    return `${this.pxValue},${36.612 + top} ${this.pxValue +
+      this.indicatorWidth / 2},${22.439 + top} ${this.pxValue -
+      this.indicatorWidth / 2},${22.439 + top}`;
   }
 }
