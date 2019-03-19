@@ -2,16 +2,17 @@ import {
   Component,
   ChangeDetectionStrategy,
   Input,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  OnChanges
 } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
 @Component({
   selector: 'pro-analog-stick',
   templateUrl: './analog-stick.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AnalogStickComponent {
+export class AnalogStickComponent implements OnChanges {
   @Input() xLabel = '';
   @Input() yLabel = '';
   @Input() color = '#ff0000';
@@ -24,11 +25,37 @@ export class AnalogStickComponent {
   @Input() max: [number, number] = [100, 100];
   private xOffset = 0.1 * 283.46;
   private size = [283.46 - 0.1 * 283.46, 283.46 - 0.1 * 283.46];
+  private storedValue = this.value;
+
+  gradientColor: SafeStyle;
+  backgroundGradientStartColor: SafeStyle;
+  backgroundGradientEndColor: SafeStyle;
+  gradientBase: SafeStyle;
 
   constructor(
     public changeDetectorRef: ChangeDetectorRef,
     private domSanitizer: DomSanitizer
   ) {}
+
+  ngOnChanges() {
+    if (this.storedValue !== this.value) {
+      this.storedValue = this.value;
+      return;
+    }
+
+    this.gradientColor = this.domSanitizer.bypassSecurityTrustStyle(
+      `stop-color: ${this.color}`
+    );
+    this.backgroundGradientStartColor = this.domSanitizer.bypassSecurityTrustStyle(
+      `stop-color: ${this.gradientStartColor}`
+    );
+    this.backgroundGradientEndColor = this.domSanitizer.bypassSecurityTrustStyle(
+      `stop-color: ${this.gradientEndColor}`
+    );
+    this.gradientBase = this.domSanitizer.bypassSecurityTrustStyle(
+      `stop-color: ${this.gradientBaseColor}`
+    );
+  }
 
   get xPercentage() {
     return (this.value[0] - this.min[0]) / this.max[0];
@@ -36,30 +63,6 @@ export class AnalogStickComponent {
 
   get yPercentage() {
     return (this.value[1] - this.min[0]) / this.max[1];
-  }
-
-  get gradientColor() {
-    return this.domSanitizer.bypassSecurityTrustStyle(
-      `stop-color: ${this.color}`
-    );
-  }
-
-  get backgroundGradientStartColor() {
-    return this.domSanitizer.bypassSecurityTrustStyle(
-      `stop-color: ${this.gradientStartColor}`
-    );
-  }
-
-  get backgroundGradientEndColor() {
-    return this.domSanitizer.bypassSecurityTrustStyle(
-      `stop-color: ${this.gradientEndColor}`
-    );
-  }
-
-  get gradientBase() {
-    return this.domSanitizer.bypassSecurityTrustStyle(
-      `stop-color: ${this.gradientBaseColor}`
-    );
   }
 
   get xRoundedPercentage() {
