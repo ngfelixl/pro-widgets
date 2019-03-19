@@ -6,7 +6,7 @@ import {
   ChangeDetectorRef,
   OnDestroy
 } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
 @Component({
   selector: 'pro-gauge',
@@ -24,8 +24,13 @@ export class GaugeComponent implements OnChanges, OnDestroy {
   @Input() pointerLength = 130;
   @Input() pointerColor = '#E52420';
   @Input() stripeColor = 'white';
+
   private actualValue = this.min;
   private interval: number;
+  private storedValue = this.value;
+
+  gradientBackgroundColor: SafeStyle;
+  gradientStripeColor: SafeStyle;
 
   constructor(
     public changeDetectorRef: ChangeDetectorRef,
@@ -40,36 +45,34 @@ export class GaugeComponent implements OnChanges, OnDestroy {
   }
 
   ngOnChanges() {
-    if (this.interval) {
-      clearInterval(this.interval);
-    }
-
-    const time = 20;
-    const steps = 15;
-    const stepSize = (this.value - this.actualValue) / steps;
-    this.actualValue += stepSize;
-    let index = 1;
-
-    this.interval = window.setInterval(() => {
-      this.actualValue += stepSize;
-      this.changeDetectorRef.detectChanges();
-      index++;
-      if (index >= steps) {
+    if (this.storedValue === this.value) {
+      this.gradientBackgroundColor = this.domSanitizer.bypassSecurityTrustStyle(
+        `stop-color:${this.backgroundColor}`
+      );
+      this.gradientStripeColor = this.domSanitizer.bypassSecurityTrustStyle(
+        `stop-color:${this.stripeColor}`
+      );
+    } else {
+      if (this.interval) {
         clearInterval(this.interval);
       }
-    }, time);
-  }
 
-  get gradientBackgroundColor() {
-    return this.domSanitizer.bypassSecurityTrustStyle(
-      `stop-color:${this.backgroundColor}`
-    );
-  }
+      const time = 20;
+      const steps = 15;
+      const stepSize = (this.value - this.actualValue) / steps;
+      this.actualValue += stepSize;
+      let index = 1;
 
-  get gradientStripeColor() {
-    return this.domSanitizer.bypassSecurityTrustStyle(
-      `stop-color:${this.stripeColor}`
-    );
+      this.interval = window.setInterval(() => {
+        this.actualValue += stepSize;
+        this.changeDetectorRef.detectChanges();
+        index++;
+        if (index >= steps) {
+          clearInterval(this.interval);
+        }
+      }, time);
+      this.storedValue = this.value;
+    }
   }
 
   get roundedValue() {

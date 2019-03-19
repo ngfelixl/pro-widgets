@@ -7,7 +7,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef
 } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
 @Component({
   selector: 'pro-digital-gauge',
@@ -41,6 +41,10 @@ export class DigitalGaugeComponent implements OnChanges, AfterViewInit {
   };
   private viewInit = false;
 
+  gradientOuterColor: SafeStyle;
+  gradientInnerColor: SafeStyle;
+  gradientUnderlineColor: SafeStyle;
+
   constructor(
     public changeDetectorRef: ChangeDetectorRef,
     private domSanitizer: DomSanitizer
@@ -49,6 +53,18 @@ export class DigitalGaugeComponent implements OnChanges, AfterViewInit {
   ngOnChanges() {
     this.checkStyleChange();
     this.setStateChange();
+  }
+
+  applyStyles() {
+    this.gradientUnderlineColor = this.domSanitizer.bypassSecurityTrustStyle(
+      `stop-color:${this.underlineColor}`
+    );
+    this.gradientOuterColor = this.domSanitizer.bypassSecurityTrustStyle(
+      `stop-color:${this.outerBackgroundColor}`
+    );
+    this.gradientInnerColor = this.domSanitizer.bypassSecurityTrustStyle(
+      `stop-color:${this.backgroundColor}`
+    );
   }
 
   ngAfterViewInit() {
@@ -67,24 +83,6 @@ export class DigitalGaugeComponent implements OnChanges, AfterViewInit {
 
   get range() {
     return this.max - this.min;
-  }
-
-  get gradientUnderlineColor() {
-    return this.domSanitizer.bypassSecurityTrustStyle(
-      `stop-color:${this.underlineColor}`
-    );
-  }
-
-  get gradientOuterColor() {
-    return this.domSanitizer.bypassSecurityTrustStyle(
-      `stop-color:${this.outerBackgroundColor}`
-    );
-  }
-
-  get gradientInnerColor() {
-    return this.domSanitizer.bypassSecurityTrustStyle(
-      `stop-color:${this.backgroundColor}`
-    );
   }
 
   get percentageValue() {
@@ -110,6 +108,7 @@ export class DigitalGaugeComponent implements OnChanges, AfterViewInit {
     if (this.lastInputValue === this.value) {
       this.setThresholds();
       this.setInitialState();
+      this.applyStyles();
     }
     this.lastInputValue = this.value;
   }
