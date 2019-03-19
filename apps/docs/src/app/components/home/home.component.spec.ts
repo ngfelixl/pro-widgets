@@ -24,7 +24,12 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent, ProGaugeComponent, ProAnalogStickComponent, FooterComponent]
+      declarations: [
+        HomeComponent,
+        ProGaugeComponent,
+        ProAnalogStickComponent,
+        FooterComponent
+      ]
     }).compileComponents();
   }));
 

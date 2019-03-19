@@ -1,0 +1,125 @@
+<svg
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  x="0px"
+  y="0px"
+  width="100%"
+  height="100%"
+  viewBox="0 0 283.46 56.69"
+  enable-background="new 0 0 283.46 56.69"
+  xml:space="preserve"
+>
+  <g id="ticks" #ticks [innerHTML]="safeTicks"></g>
+  <g id="background">
+    <linearGradient
+      id="SVGID_1_"
+      gradientUnits="userSpaceOnUse"
+      [attr.x1]="backgroundPosX1"
+      y1="33.0693"
+      [attr.x2]="backgroundPosX2"
+      y2="33.0693"
+    >
+      <stop offset="0" [style]="gradientStartSanitized" />
+      <stop
+        [attr.offset]="+gradientMidPosition / 100"
+        [style]="gradientMidSanitized"
+      />
+      <stop offset="1" [style]="gradientEndSanitized" />
+    </linearGradient>
+    <rect
+      [attr.x]="backgroundPosX1"
+      y="29.525"
+      fill="url(#SVGID_1_)"
+      [attr.width]="backgroundWidth"
+      height="7.088"
+    />
+  </g>
+  <g id="border">
+    <line
+      fill="none"
+      [attr.stroke]="strokeColor"
+      stroke-miterlimit="10"
+      x1="274.959"
+      y1="37.111"
+      x2="274.959"
+      y2="22.439"
+    />
+    <line
+      fill="none"
+      [attr.stroke]="strokeColor"
+      stroke-miterlimit="10"
+      x1="8.501"
+      y1="37.106"
+      x2="8.501"
+      y2="22.44"
+    />
+    <line
+      fill="none"
+      [attr.stroke]="strokeColor"
+      stroke-miterlimit="10"
+      x1="8.501"
+      y1="36.611"
+      x2="274.959"
+      y2="36.611"
+    />
+  </g>
+  <g id="indicator">
+    <linearGradient
+      id="SVGID_2_"
+      gradientUnits="userSpaceOnUse"
+      x1="97.687"
+      y1="36.6123"
+      x2="97.687"
+      y2="22.4395"
+    >
+      <stop offset="0" [style]="indicatorBottomSanitized" />
+      <stop offset="1" [style]="indicatorTopSanitized" />
+    </linearGradient>
+    <polygon
+      [attr.fill]="inRange ? 'url(#SVGID_2_)' : outOfRangeColor"
+      [attr.points]="displayValue"
+    />
+  </g>
+  <g id="labels">
+    <text
+      [attr.transform]="'matrix(1 0 0 1 142 ' + (52.8184 + +marginBottom) + ')'"
+      [attr.fill]="fontColor"
+      font-family="'Roboto-Regular', sans-serif, Arial, Helvetica"
+      font-size="18"
+      text-anchor="middle"
+    >
+      {{ unit }}
+    </text>
+    <text
+      [attr.transform]="
+        'matrix(1 0 0 1 274.959 ' + (52.8174 + +marginBottom) + ')'
+      "
+      [attr.fill]="fontColor"
+      font-family="'Roboto-Regular', sans-serif, Arial, Helvetica"
+      font-size="18"
+      text-anchor="end"
+    >
+      {{ max }}
+    </text>
+    <text
+      [attr.transform]="
+        'matrix(1 0 0 1 8.5015 ' + (52.8174 + +marginBottom) + ')'
+      "
+      [attr.fill]="fontColor"
+      font-family="'Roboto-Regular', sans-serif, Arial, Helvetica"
+      font-size="18"
+    >
+      {{ min }}
+    </text>
+    <text
+      [attr.transform]="'matrix(1 0 0 1 142 ' + (15.9448 - +marginTop) + ')'"
+      [attr.fill]="fontColor"
+      font-family="'Roboto-Regular', sans-serif, Arial, Helvetica"
+      font-size="18"
+      text-anchor="middle"
+    >
+      {{ title }}
+    </text>
+  </g>
+</svg>
