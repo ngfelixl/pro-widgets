@@ -16,7 +16,7 @@ The lib is an angular library and the docs are an angular pwa.
 
 ## Users Guide
 
-See the users guide [here](./projects/pro-widgets/README.md).
+See the users guide [here](./libs/pro-widgets/README.md).
 
 ## Developers Guide
 
