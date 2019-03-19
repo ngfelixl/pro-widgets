@@ -9,7 +9,8 @@ import {
   ProModule,
   GaugeComponent,
   DigitalGaugeComponent,
-  AnalogStickComponent
+  AnalogStickComponent,
+  LinearGaugeComponent
 } from '@pro-widgets';
 import { AppRoutingModule } from './app-routing.module';
 import { components } from './components';
@@ -33,6 +34,11 @@ import { AppComponent } from './app.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [GaugeComponent, DigitalGaugeComponent, AnalogStickComponent]
+  entryComponents: [
+    GaugeComponent,
+    DigitalGaugeComponent,
+    AnalogStickComponent,
+    LinearGaugeComponent
+  ]
 })
 export class AppModule {}

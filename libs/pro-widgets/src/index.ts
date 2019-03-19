@@ -7,4 +7,7 @@ export * from './lib/digital-gauge/digital-gauge.component';
 export * from './lib/gauge/gauge.module';
 export * from './lib/gauge/gauge.component';
 
+export * from './lib/linear-gauge/linear-gauge.module';
+export * from './lib/linear-gauge/linear-gauge.component';
+
 export * from './lib/pro.module';
