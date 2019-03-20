@@ -9,7 +9,7 @@ Responsive and animated SVG widgets for Angular.
 See the projects [website](https://ngfelixl.github.io/pro-widgets) to get your hands on this repository
 and an idea of what it does. The following image contains two example widgets.
 
-<img src="./assets/preview.png" alt="Widgets" width="300px">
+<img src="https://raw.githubusercontent.com/ngfelixl/pro-widgets/master/assets/widgets.png" alt="Widgets" width="100%">
 
 The library itself is located in the `/projects/pro-widgets` folder and the docs are contained in the `/src` folder.
 The lib is an angular library and the docs are an angular pwa.
