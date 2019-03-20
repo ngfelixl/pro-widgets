@@ -60,6 +60,7 @@ export class LinearGaugeComponent implements OnChanges, OnInit {
 
   ngOnInit() {
     this.calculateTicks();
+    this.applyStyles();
     this.backgroundMin = this.min;
     this.backgroundMax = this.max;
     this.height = 56.69 + +this.marginTop + +this.marginBottom;
@@ -73,10 +74,10 @@ export class LinearGaugeComponent implements OnChanges, OnInit {
 
     this.height = 56.69 + +this.marginTop + +this.marginBottom;
     this.calculateTicks();
-    this.applyStyleChanges();
+    this.applyStyles();
   }
 
-  applyStyleChanges() {
+  applyStyles() {
     this.gradientStartSanitized = this.domSanitizer.bypassSecurityTrustStyle(
       `stop-color:${this.gradientStartColor}`
     );

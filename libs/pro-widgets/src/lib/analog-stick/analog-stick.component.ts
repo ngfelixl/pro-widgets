@@ -3,7 +3,8 @@ import {
   ChangeDetectionStrategy,
   Input,
   ChangeDetectorRef,
-  OnChanges
+  OnChanges,
+  OnInit
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
@@ -12,7 +13,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
   templateUrl: './analog-stick.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AnalogStickComponent implements OnChanges {
+export class AnalogStickComponent implements OnInit, OnChanges {
   @Input() xLabel = '';
   @Input() yLabel = '';
   @Input() color = '#ff0000';
@@ -37,12 +38,20 @@ export class AnalogStickComponent implements OnChanges {
     private domSanitizer: DomSanitizer
   ) {}
 
+  ngOnInit() {
+    this.applyStyles();
+  }
+
   ngOnChanges() {
     if (this.storedValue !== this.value) {
       this.storedValue = this.value;
       return;
     }
 
+    this.applyStyles();
+  }
+
+  applyStyles() {
     this.gradientColor = this.domSanitizer.bypassSecurityTrustStyle(
       `stop-color: ${this.color}`
     );
