@@ -4,7 +4,8 @@ import {
   Input,
   OnChanges,
   ChangeDetectorRef,
-  OnDestroy
+  OnDestroy,
+  OnInit
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
@@ -13,7 +14,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
   templateUrl: `./gauge.component.html`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GaugeComponent implements OnChanges, OnDestroy {
+export class GaugeComponent implements OnInit, OnChanges, OnDestroy {
   @Input() min = 0;
   @Input() max = 100;
   @Input() value = 30;
@@ -44,14 +45,13 @@ export class GaugeComponent implements OnChanges, OnDestroy {
     return this.max - this.min;
   }
 
+  ngOnInit() {
+    this.applyStyles();
+  }
+
   ngOnChanges() {
     if (this.storedValue === this.value) {
-      this.gradientBackgroundColor = this.domSanitizer.bypassSecurityTrustStyle(
-        `stop-color:${this.backgroundColor}`
-      );
-      this.gradientStripeColor = this.domSanitizer.bypassSecurityTrustStyle(
-        `stop-color:${this.stripeColor}`
-      );
+      this.applyStyles();
     } else {
       if (this.interval) {
         clearInterval(this.interval);
@@ -73,6 +73,15 @@ export class GaugeComponent implements OnChanges, OnDestroy {
       }, time);
       this.storedValue = this.value;
     }
+  }
+
+  applyStyles() {
+    this.gradientBackgroundColor = this.domSanitizer.bypassSecurityTrustStyle(
+      `stop-color:${this.backgroundColor}`
+    );
+    this.gradientStripeColor = this.domSanitizer.bypassSecurityTrustStyle(
+      `stop-color:${this.stripeColor}`
+    );
   }
 
   get roundedValue() {

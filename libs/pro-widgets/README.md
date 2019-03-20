@@ -1,7 +1,7 @@
 # Angular Pro Widgets
 
-[![Build Status](https://travis-ci.org/ngfelixl/pro-widgets.svg?branch=master)](https://travis-ci.org/ngfelixl/pro-widgets)
-[![npm](https://img.shields.io/npm/v/pro-widgets.svg)](https://npmjs.com/package/pro-widgets)
+[![Build Status](https://travis-ci.org/ngfelixl/pro-widgets.svg?branch=master)](https://travis-ci.org/ngfelixl/pro-widgets)
+[![npm](https://img.shields.io/npm/v/pro-widgets.svg)](https://npmjs.com/package/pro-widgets)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 This library provides animated and highly customizable
@@ -58,7 +58,7 @@ the widgets for your needs.
 
 ## Get in touch
 
-[![twitter](https://img.shields.io/badge/twitter-%40ngfelixl-blue.svg?logo=twitter)](https://twitter.com/intent/follow?screen_name=ngfelixl)
+[![twitter](https://img.shields.io/badge/twitter-%40ngfelixl-blue.svg?logo=twitter)](https://twitter.com/intent/follow?screen_name=ngfelixl)
 [![github](https://img.shields.io/badge/github-%40ngfelixl-blue.svg?logo=github)](https://github.com/ngfelixl)
 
 Hi, I am Felix,
