@@ -12,12 +12,13 @@ in the [documentation](https://ngfelixl.github.io/pro-widgets).
 
 This is currently in an early stage. API changes are likely.
 
-<img src="https://github.com/ngfelixl/pro-widgets/blob/master/img/demo.PNG?raw=true" alt="Widgets" width="400px">
+<img src="https://raw.githubusercontent.com/ngfelixl/pro-widgets/master/assets/widgets.png" alt="Widgets" width="100%">
 
 Currently available widgets:
 
 - Gauge
 - Digital Gauge
+- Linear Gauge
 - Analog Stick
 
 more widgets coming soon. Widget ideas welcome.
