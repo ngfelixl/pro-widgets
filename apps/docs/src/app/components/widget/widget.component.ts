@@ -33,8 +33,7 @@ export class WidgetComponent implements OnInit, OnDestroy {
   private viewContainerRef: ViewContainerRef;
   private componentRef: ComponentRef<any>;
   private routerSubscription: Subscription;
-  private formSubscription: Subscription;
-  private valueSubscription: Subscription;
+  private subscriptions = new Subscription();
   value$: Observable<number | number[]>;
   private interval: number;
 
@@ -49,6 +48,7 @@ export class WidgetComponent implements OnInit, OnDestroy {
       .pipe(map(p => p.id))
       .subscribe(id => {
         this.destroySubscriptions();
+        this.subscriptions = new Subscription();
         this.form = new FormGroup({});
 
         this.id = id;
@@ -59,15 +59,16 @@ export class WidgetComponent implements OnInit, OnDestroy {
           this.form.patchValue(this.themes[0]);
           this.loadComponent();
 
-          this.formSubscription = this.form.valueChanges
+          const formSubscription = this.form.valueChanges
             .pipe(debounceTime(100))
             .subscribe(() => {
               this.applyStyles();
             });
 
           this.value$ = this.valueGenerator;
+          // this.componentRef.instance.value = this.valueGenerator;
 
-          this.valueSubscription = this.value$.subscribe(
+          const valueSubscription = this.value$.subscribe(
             (data: number | number[]) => {
               this.componentRef.instance.value = data;
               if (this.componentRef.instance.ngOnChanges) {
@@ -76,6 +77,9 @@ export class WidgetComponent implements OnInit, OnDestroy {
               this.componentRef.instance.changeDetectorRef.detectChanges();
             }
           );
+
+          this.subscriptions.add(formSubscription);
+          this.subscriptions.add(valueSubscription);
         } else {
           this.router.navigate(['/page-not-found']);
         }
@@ -117,6 +121,7 @@ export class WidgetComponent implements OnInit, OnDestroy {
         componentFactory
       );
       this.applyStyles();
+      // this.componentRef.instance.value = this.valueGenerator;
     }
   }
 
@@ -135,12 +140,7 @@ export class WidgetComponent implements OnInit, OnDestroy {
   }
 
   destroySubscriptions() {
-    if (this.formSubscription) {
-      this.formSubscription.unsubscribe();
-    }
-    if (this.valueSubscription) {
-      this.valueSubscription.unsubscribe();
-    }
+    this.subscriptions.unsubscribe();
   }
 
   /**

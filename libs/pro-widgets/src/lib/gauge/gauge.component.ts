@@ -8,6 +8,8 @@ import {
   OnInit
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { Observable, animationFrameScheduler, interval, of } from 'rxjs';
+import { withLatestFrom, scan, map, share, distinctUntilChanged, audit, startWith, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'pro-gauge',
@@ -17,7 +19,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 export class GaugeComponent implements OnInit, OnChanges, OnDestroy {
   @Input() min = 0;
   @Input() max = 100;
-  @Input() value = 30;
+  @Input() value: number;
   @Input() unit = '';
   @Input() color = '#474747';
   @Input() backgroundColor = '#0A0B14';
@@ -25,10 +27,15 @@ export class GaugeComponent implements OnInit, OnChanges, OnDestroy {
   @Input() pointerLength = 130;
   @Input() pointerColor = '#E52420';
   @Input() stripeColor = 'white';
+  @Input() digitalDelay = 100;
+  @Input() interpolationRate = 0.05;
 
-  private actualValue = this.min;
-  private interval: number;
-  private storedValue = this.value;
+  private rangeOfCircle = (225 / 360) * Math.PI * 2;
+  private offset = (157.5 / 360) * Math.PI * 2;
+  private center = [141.732, 141.732];
+  smoothX$: Observable<number>;
+  smoothY$: Observable<number>;
+  roundedValue$: Observable<number>;
 
   gradientBackgroundColor: SafeStyle;
   gradientStripeColor: SafeStyle;
@@ -37,9 +44,6 @@ export class GaugeComponent implements OnInit, OnChanges, OnDestroy {
     public changeDetectorRef: ChangeDetectorRef,
     private domSanitizer: DomSanitizer
   ) {}
-  private rangeOfCircle = (225 / 360) * Math.PI * 2;
-  private offset = (157.5 / 360) * Math.PI * 2;
-  private center = [141.732, 141.732];
 
   get range() {
     return this.max - this.min;
@@ -47,32 +51,34 @@ export class GaugeComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     this.applyStyles();
+    const animationFrame$ = interval(0, animationFrameScheduler).pipe(
+      map(() => this.value),
+      share()
+    );
+    this.roundedValue$ = animationFrame$.pipe(
+      map(value => Math.round(value * 10) / 10),
+      audit(() => interval(this.digitalDelay)),
+      startWith(0)
+    );
+    const smoothCoordinates$ = animationFrame$.pipe(
+      scan(this.linearInterpolation.bind(this)),
+      map<number, number[]>(this.coordinates.bind(this))
+    );
+    this.smoothX$ = smoothCoordinates$.pipe(
+      map(coordinates => coordinates[0])
+    );
+    this.smoothY$ = smoothCoordinates$.pipe(
+      map(coordinates => coordinates[1])
+    );
+
+  }
+
+  digitalWait() {
+    return this.digitalDelay;
   }
 
   ngOnChanges() {
-    if (this.storedValue === this.value) {
-      this.applyStyles();
-    } else {
-      if (this.interval) {
-        clearInterval(this.interval);
-      }
-
-      const time = 20;
-      const steps = 15;
-      const stepSize = (this.value - this.actualValue) / steps;
-      this.actualValue += stepSize;
-      let index = 1;
-
-      this.interval = window.setInterval(() => {
-        this.actualValue += stepSize;
-        this.changeDetectorRef.detectChanges();
-        index++;
-        if (index >= steps) {
-          clearInterval(this.interval);
-        }
-      }, time);
-      this.storedValue = this.value;
-    }
+    this.applyStyles();
   }
 
   applyStyles() {
@@ -84,13 +90,9 @@ export class GaugeComponent implements OnInit, OnChanges, OnDestroy {
     );
   }
 
-  get roundedValue() {
-    return Math.round(this.value * 10) / 10;
-  }
-
-  get coordinates() {
+  coordinates(value: number) {
     const minOffset = (this.min / this.range) * this.rangeOfCircle;
-    const alpha = (this.actualValue / this.range) * this.rangeOfCircle;
+    const alpha = (value / this.range) * this.rangeOfCircle;
 
     const x =
       Math.cos(this.offset + alpha - minOffset) * this.pointerLength +
@@ -102,8 +104,12 @@ export class GaugeComponent implements OnInit, OnChanges, OnDestroy {
     return [x, y];
   }
 
+  linearInterpolation(startValue: number, endValue: number) {
+    const dValue = endValue - startValue;
+    return startValue + dValue * this.interpolationRate;
+  }
+
   ngOnDestroy() {
-    clearInterval(this.interval);
     this.changeDetectorRef.detach();
   }
 }

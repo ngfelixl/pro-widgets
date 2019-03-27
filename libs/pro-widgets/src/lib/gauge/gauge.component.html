@@ -334,8 +334,8 @@
       stroke-miterlimit="10"
       x1="141.73"
       y1="141.73"
-      [attr.x2]="coordinates[0]"
-      [attr.y2]="coordinates[1]"
+      [attr.x2]="(smoothX$ | async)"
+      [attr.y2]="(smoothY$ | async)"
     />
     <circle [attr.fill]="pointerColor" cx="141.732" cy="141.731" r="7.086" />
     <text
@@ -345,7 +345,7 @@
       font-size="21"
       text-anchor="middle"
     >
-      {{ roundedValue }}
+      {{ roundedValue$ | async }}
     </text>
     <text
       transform="matrix(1 0 0 1 60.334 194.334)"

@@ -35,29 +35,19 @@ describe('AnalogStickComponent', () => {
     fixture.detectChanges();
 
     const pointer = fixture.debugElement.query(By.css('#circle-pointer'));
-    expect(Math.abs(+pointer.attributes['cx'] - 155.906)).toBeLessThan(0.01);
-    expect(Math.abs(+pointer.attributes['cy'] - 127.559)).toBeLessThan(0.01);
+    expect(Math.abs(+(pointer.attributes['cx'] as string) - 155.906)).toBeLessThan(0.01);
+    expect(Math.abs(+(pointer.attributes['cy'] as string) - 127.559)).toBeLessThan(0.01);
   });
 
   describe('labels', () => {
-    it('should display the correct values', () => {
+    it('should display the old value when new value enters', () => {
       component.value = [20, 70];
       component.changeDetectorRef.markForCheck();
       fixture.detectChanges();
 
       const texts = fixture.debugElement.query(By.css('#labels'));
-      expect(texts.children[2].nativeElement.innerHTML).toBe(' 70% ');
-      expect(texts.children[3].nativeElement.innerHTML).toBe(' 20% ');
-    });
-
-    it('should should round the values to full numbers', () => {
-      component.value = [20.6, 70.4];
-      component.changeDetectorRef.markForCheck();
-      fixture.detectChanges();
-
-      const texts = fixture.debugElement.query(By.css('#labels'));
-      expect(texts.children[2].nativeElement.innerHTML).toBe(' 70% ');
-      expect(texts.children[3].nativeElement.innerHTML).toBe(' 21% ');
+      expect(texts.children[2].nativeElement.innerHTML).toBe(' 50% ');
+      expect(texts.children[3].nativeElement.innerHTML).toBe(' 50% ');
     });
 
     it('should display the labels', () => {
