@@ -19,6 +19,10 @@ export const gauge: Widget = {
     {
       label: 'Labels and Units',
       fields: ['min', 'max', 'unit']
+    },
+    {
+      label: 'Timers',
+      fields: ['digitalDelay', 'interpolationRate']
     }
   ]
 };

@@ -4,16 +4,24 @@ import {
   Input,
   ChangeDetectorRef,
   OnChanges,
-  OnInit
+  OnInit,
+  OnDestroy
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { interval, animationFrameScheduler, Observable, Subscription } from 'rxjs';
+import { map, share, startWith, tap, scan } from 'rxjs/operators';
+
+interface ValuePair {
+  x: number,
+  y: number
+}
 
 @Component({
   selector: 'pro-analog-stick',
   templateUrl: './analog-stick.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AnalogStickComponent implements OnInit, OnChanges {
+export class AnalogStickComponent implements OnInit, OnChanges, OnDestroy {
   @Input() xLabel = '';
   @Input() yLabel = '';
   @Input() color = '#ff0000';
@@ -21,9 +29,10 @@ export class AnalogStickComponent implements OnInit, OnChanges {
   @Input() gradientEndColor = '#B2B2B2';
   @Input() gradientBaseColor = '#202020';
   @Input() sideColor = '#575756';
-  @Input() value: [number, number] = [50, 50];
-  @Input() min: [number, number] = [0, 0];
-  @Input() max: [number, number] = [100, 100];
+  @Input() value: number[] = [50, 50];
+  @Input() min: number[] = [0, 0];
+  @Input() max: number[] = [100, 100];
+  @Input() interpolationRate = 0.05;
   private xOffset = 0.1 * 283.46;
   private size = [283.46 - 0.1 * 283.46, 283.46 - 0.1 * 283.46];
   private storedValue = this.value;
@@ -32,6 +41,16 @@ export class AnalogStickComponent implements OnInit, OnChanges {
   backgroundGradientStartColor: SafeStyle;
   backgroundGradientEndColor: SafeStyle;
   gradientBase: SafeStyle;
+  subscription = new Subscription();
+
+  xPercentage = 0.5;
+  yPercentage = 0.5;
+  xPosition = 50;
+  yPosition = 50;
+  xRoundedPercentage = 50;
+  yRoundedPercentage = 50;
+
+  position$: Observable<ValuePair>;
 
   constructor(
     public changeDetectorRef: ChangeDetectorRef,
@@ -40,15 +59,74 @@ export class AnalogStickComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.applyStyles();
+
+    const animationFrame$ = interval(0, animationFrameScheduler).pipe(
+      map(() => this.value),
+      startWith([50, 50]),
+      share()
+    );
+
+    const percentage$ = animationFrame$.pipe(
+      map(values => ({
+        x: (values[0] - this.min[0]) / this.max[0],
+        y: (values[1] - this.min[1]) / this.max[1]
+      })),
+      scan(this.linearInterpolation.bind(this)),
+      share()
+    );
+
+    this.position$ = percentage$.pipe(
+      map(percentageValues => {
+        return {
+          x: this.xOffset + this.size[0] * percentageValues.x,
+          y: this.size[1] - this.size[1] * percentageValues.y
+        }
+      })
+    );
+
+    const roundedValues$ = percentage$.pipe(
+      map(percentageValues => ({
+        x: Math.round(percentageValues.x * 100),
+        y: Math.round(percentageValues.y * 100)
+      }))
+    );
+
+    this.subscription.add(this.position$.subscribe(position => {
+      this.xPosition = position.x;
+      this.yPosition = position.y;
+    }));
+
+    this.subscription.add(percentage$.subscribe(percentage => {
+      this.xPercentage = percentage.x;
+      this.yPercentage = percentage.y;
+    }));
+
+    this.subscription.add(roundedValues$.subscribe(values => {
+      this.xRoundedPercentage = values.x;
+      this.yRoundedPercentage = values.y;
+    }));
   }
 
   ngOnChanges() {
+    if (isNaN(this.interpolationRate)) {
+      this.interpolationRate = 0;
+    }
+
     if (this.storedValue !== this.value) {
       this.storedValue = this.value;
       return;
     }
 
     this.applyStyles();
+  }
+
+  linearInterpolation(startValue: ValuePair, endValue: ValuePair) {
+    const dx = endValue.x - startValue.x;
+    const dy = endValue.y - startValue.y;
+    return {
+      x: startValue.x + dx * this.interpolationRate,
+      y: startValue.y + dy * this.interpolationRate
+    };
   }
 
   applyStyles() {
@@ -66,27 +144,7 @@ export class AnalogStickComponent implements OnInit, OnChanges {
     );
   }
 
-  get xPercentage() {
-    return (this.value[0] - this.min[0]) / this.max[0];
-  }
-
-  get yPercentage() {
-    return (this.value[1] - this.min[0]) / this.max[1];
-  }
-
-  get xRoundedPercentage() {
-    return Math.round(this.xPercentage * 100);
-  }
-
-  get yRoundedPercentage() {
-    return Math.round(this.yPercentage * 100);
-  }
-
-  get xPosition() {
-    return this.xOffset + this.size[0] * this.xPercentage;
-  }
-
-  get yPosition() {
-    return this.size[1] - this.size[1] * this.yPercentage;
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

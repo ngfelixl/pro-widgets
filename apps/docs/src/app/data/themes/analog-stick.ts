@@ -7,7 +7,8 @@ export const styles = [
     gradientBaseColor: '#202020',
     sideColor: '#202020',
     yLabel: 'Left stick y',
-    xLabel: 'Left stick x'
+    xLabel: 'Left stick x',
+    interpolationRate: 0.05
   },
   {
     name: 'Light',
@@ -17,7 +18,8 @@ export const styles = [
     gradientBaseColor: '#d0d0d0',
     sideColor: '#eeeeee',
     yLabel: 'Left stick y',
-    xLabel: 'Left stick x'
+    xLabel: 'Left stick x',
+    interpolationRate: 0.05
   },
   {
     name: 'Green Accent',
@@ -27,6 +29,7 @@ export const styles = [
     gradientBaseColor: '#66ff22',
     sideColor: '#202020',
     yLabel: 'Left stick y',
-    xLabel: 'Left stick x'
+    xLabel: 'Left stick x',
+    interpolationRate: 0.05
   }
 ];
