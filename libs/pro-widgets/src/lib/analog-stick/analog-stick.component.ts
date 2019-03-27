@@ -1,6 +1,5 @@
 import {
   Component,
-  ChangeDetectionStrategy,
   Input,
   ChangeDetectorRef,
   OnChanges,
@@ -9,7 +8,7 @@ import {
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { interval, animationFrameScheduler, Observable, Subscription } from 'rxjs';
-import { map, share, startWith, tap, scan } from 'rxjs/operators';
+import { map, share, startWith, scan } from 'rxjs/operators';
 
 interface ValuePair {
   x: number,
@@ -108,7 +107,7 @@ export class AnalogStickComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges() {
-    if (isNaN(this.interpolationRate)) {
+    if (isNaN(this.interpolationRate) || this.interpolationRate > 1) {
       this.interpolationRate = 0;
     }
 

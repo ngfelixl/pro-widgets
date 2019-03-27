@@ -70,15 +70,14 @@ export class GaugeComponent implements OnInit, OnChanges, OnDestroy {
     this.smoothY$ = smoothCoordinates$.pipe(
       map(coordinates => coordinates[1])
     );
-
-  }
-
-  digitalWait() {
-    return this.digitalDelay;
   }
 
   ngOnChanges() {
     this.applyStyles();
+
+    if (isNaN(this.interpolationRate) || this.interpolationRate > 1) {
+      this.interpolationRate = 0;
+    }
   }
 
   applyStyles() {
