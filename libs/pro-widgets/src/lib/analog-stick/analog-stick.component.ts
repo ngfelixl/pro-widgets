@@ -7,17 +7,22 @@ import {
   OnDestroy
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { interval, animationFrameScheduler, Observable, Subscription } from 'rxjs';
+import {
+  interval,
+  animationFrameScheduler,
+  Observable,
+  Subscription
+} from 'rxjs';
 import { map, share, startWith, scan } from 'rxjs/operators';
 
 interface ValuePair {
-  x: number,
-  y: number
+  x: number;
+  y: number;
 }
 
 @Component({
   selector: 'pro-analog-stick',
-  templateUrl: './analog-stick.component.html',
+  templateUrl: './analog-stick.component.html'
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AnalogStickComponent implements OnInit, OnChanges, OnDestroy {
@@ -79,7 +84,7 @@ export class AnalogStickComponent implements OnInit, OnChanges, OnDestroy {
         return {
           x: this.xOffset + this.size[0] * percentageValues.x,
           y: this.size[1] - this.size[1] * percentageValues.y
-        }
+        };
       })
     );
 
@@ -90,20 +95,26 @@ export class AnalogStickComponent implements OnInit, OnChanges, OnDestroy {
       }))
     );
 
-    this.subscription.add(this.position$.subscribe(position => {
-      this.xPosition = position.x;
-      this.yPosition = position.y;
-    }));
+    this.subscription.add(
+      this.position$.subscribe(position => {
+        this.xPosition = position.x;
+        this.yPosition = position.y;
+      })
+    );
 
-    this.subscription.add(percentage$.subscribe(percentage => {
-      this.xPercentage = percentage.x;
-      this.yPercentage = percentage.y;
-    }));
+    this.subscription.add(
+      percentage$.subscribe(percentage => {
+        this.xPercentage = percentage.x;
+        this.yPercentage = percentage.y;
+      })
+    );
 
-    this.subscription.add(roundedValues$.subscribe(values => {
-      this.xRoundedPercentage = values.x;
-      this.yRoundedPercentage = values.y;
-    }));
+    this.subscription.add(
+      roundedValues$.subscribe(values => {
+        this.xRoundedPercentage = values.x;
+        this.yRoundedPercentage = values.y;
+      })
+    );
   }
 
   ngOnChanges() {

@@ -10,4 +10,7 @@ export * from './lib/gauge/gauge.component';
 export * from './lib/linear-gauge/linear-gauge.module';
 export * from './lib/linear-gauge/linear-gauge.component';
 
+export * from './lib/space-tracker/space-tracker.module';
+export * from './lib/space-tracker/space-tracker.component';
+
 export * from './lib/pro.module';

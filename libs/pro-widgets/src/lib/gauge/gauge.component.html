@@ -334,8 +334,8 @@
       stroke-miterlimit="10"
       x1="141.73"
       y1="141.73"
-      [attr.x2]="(smoothX$ | async)"
-      [attr.y2]="(smoothY$ | async)"
+      [attr.x2]="smoothX$ | async"
+      [attr.y2]="smoothY$ | async"
     />
     <circle [attr.fill]="pointerColor" cx="141.732" cy="141.731" r="7.086" />
     <text

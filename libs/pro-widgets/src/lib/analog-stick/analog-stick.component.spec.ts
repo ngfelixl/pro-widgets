@@ -35,8 +35,12 @@ describe('AnalogStickComponent', () => {
     fixture.detectChanges();
 
     const pointer = fixture.debugElement.query(By.css('#circle-pointer'));
-    expect(Math.abs(+(pointer.attributes['cx'] as string) - 155.906)).toBeLessThan(0.01);
-    expect(Math.abs(+(pointer.attributes['cy'] as string) - 127.559)).toBeLessThan(0.01);
+    expect(
+      Math.abs(+(pointer.attributes['cx'] as string) - 155.906)
+    ).toBeLessThan(0.01);
+    expect(
+      Math.abs(+(pointer.attributes['cy'] as string) - 127.559)
+    ).toBeLessThan(0.01);
   });
 
   describe('labels', () => {
