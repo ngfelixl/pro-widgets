@@ -177,6 +177,7 @@ export class SpaceTrackerComponent
     );
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = PCFSoftShadowMap;
+    this.renderer.setPixelRatio(window.devicePixelRatio);
   }
 
   animate(animationFrame$: Observable<{ [id: string]: number[] }>) {
