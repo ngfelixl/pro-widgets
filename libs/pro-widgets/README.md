@@ -21,6 +21,7 @@ Currently available widgets:
 - Digital Gauge
 - Linear Gauge
 - Analog Stick
+- Space Tracker (3D)
 
 more widgets coming soon. Widget ideas welcome.
 
