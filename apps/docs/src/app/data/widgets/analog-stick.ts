@@ -10,15 +10,15 @@ export const analogStick: Widget = {
   dataFieldName: 'value',
   valueGenerator: () => {
     const time = new Date().getTime() / 1000;
-    if (time%20 > 10) {
+    if (time % 20 > 10) {
       const angle = new Date().getTime() / 800;
       return [
         Math.round((Math.sin(angle / 3) * 30 + 50) * 100) / 100,
         Math.round((Math.cos(angle) * 40 + 50) * 100) / 100
       ];
     } else {
-      const roundedTime = (Math.round(time));
-      if (roundedTime%1 === 0 && lastTime !== roundedTime) {
+      const roundedTime = Math.round(time);
+      if (roundedTime % 1 === 0 && lastTime !== roundedTime) {
         response = [
           Math.round(Math.random() * 10000) / 100,
           Math.round(Math.random() * 10000) / 100

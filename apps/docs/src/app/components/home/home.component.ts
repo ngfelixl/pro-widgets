@@ -20,11 +20,7 @@ export class HomeComponent implements OnInit {
     );
 
     this.analogStickValue$ = interval(600).pipe(
-      map(() => [
-          Math.random() * 100,
-          Math.random() * 100
-        ]
-      ),
+      map(() => [Math.random() * 100, Math.random() * 100]),
       startWith([50, 50])
     );
   }

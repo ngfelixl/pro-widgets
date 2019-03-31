@@ -8,8 +8,14 @@ import {
   OnInit
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { Observable, animationFrameScheduler, interval, of } from 'rxjs';
-import { withLatestFrom, scan, map, share, distinctUntilChanged, audit, startWith, tap } from 'rxjs/operators';
+import { Observable, animationFrameScheduler, interval } from 'rxjs';
+import {
+  scan,
+  map,
+  share,
+  audit,
+  startWith
+} from 'rxjs/operators';
 
 @Component({
   selector: 'pro-gauge',
@@ -64,12 +70,8 @@ export class GaugeComponent implements OnInit, OnChanges, OnDestroy {
       scan(this.linearInterpolation.bind(this)),
       map<number, number[]>(this.coordinates.bind(this))
     );
-    this.smoothX$ = smoothCoordinates$.pipe(
-      map(coordinates => coordinates[0])
-    );
-    this.smoothY$ = smoothCoordinates$.pipe(
-      map(coordinates => coordinates[1])
-    );
+    this.smoothX$ = smoothCoordinates$.pipe(map(coordinates => coordinates[0]));
+    this.smoothY$ = smoothCoordinates$.pipe(map(coordinates => coordinates[1]));
   }
 
   ngOnChanges() {

@@ -1,11 +1,18 @@
 <h2>{{ widget?.name }}</h2>
 <div class="flex">
-  <ng-template appWidgetHost class="widget-host"></ng-template>
+  <div class="widget-container">
+    <ng-template appWidgetHost class="widget-host"></ng-template>
+  </div>
 
-  <div class="container">
+  <div class="spacer"></div>
+
+  <div class="input-container">
     <div class="input-data mat-elevation-z1 dark-theme">
-      <b>{{ widget?.name }} input bindings</b><br />
-      value: {{ value$ | async | json }}<br /><br />
+      <div class="title">
+        <b>{{ widget?.name }} input bindings</b><br />
+        <span class="value">value: {{ value$ | async | json }}</span
+        ><br /><br />
+      </div>
       <mat-form-field color="accent">
         <mat-select
           placeholder="Theme"

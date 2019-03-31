@@ -18,7 +18,8 @@
     "paths": {
       "@pro-widgets": ["libs/pro-widgets/src/index.ts"],
       "@docs": ["apps/docs/src"],
-      "@docs/*": ["apps/docs/src/*"]
+      "@docs/*": ["apps/docs/src/*"],
+      "three-full": ["node_modules/@types/three"]
     }
   },
   "exclude": ["node_modules", "tmp"]

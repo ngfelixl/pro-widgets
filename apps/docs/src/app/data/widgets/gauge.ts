@@ -11,11 +11,11 @@ export const gauge: Widget = {
   dataFieldName: 'value',
   valueGenerator: () => {
     const time = new Date().getTime() / 1000;
-    if (time%20 > 10) {
+    if (time % 20 > 10) {
       return (Math.sin(time) + 1) * 25 + (Math.sin(time / 3 + 30) + 1) * 25;
     } else {
-      const roundedTime = (Math.round(time));
-      if (roundedTime%1 === 0 && lastTime !== roundedTime) {
+      const roundedTime = Math.round(time);
+      if (roundedTime % 1 === 0 && lastTime !== roundedTime) {
         response = Math.random() * 100;
         lastTime = roundedTime;
       }

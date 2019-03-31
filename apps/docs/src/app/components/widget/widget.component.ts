@@ -16,7 +16,7 @@ import { widgets } from '../../data/widgets/index';
 import { themes } from '../../data/themes/index';
 
 import { DynamicFormsService } from '@docs/app/services/dynamic-forms.service';
-import { Widget, Tab } from '@docs/app/models/widget';
+import { Widget, Tab, WidgetData } from '@docs/app/models/widget';
 import { WidgetHostDirective } from '@docs/app/directive/widget-host.directive';
 
 @Component({
@@ -25,16 +25,16 @@ import { WidgetHostDirective } from '@docs/app/directive/widget-host.directive';
   styleUrls: ['./widget.component.scss']
 })
 export class WidgetComponent implements OnInit, OnDestroy {
+  @ViewChild(WidgetHostDirective) widgetContainer: WidgetHostDirective;
   widget: Widget;
   themes: any;
   form: FormGroup;
   id: string;
-  @ViewChild(WidgetHostDirective) widgetContainer: WidgetHostDirective;
+  value$: Observable<WidgetData>;
   private viewContainerRef: ViewContainerRef;
   private componentRef: ComponentRef<any>;
   private routerSubscription: Subscription;
   private subscriptions = new Subscription();
-  value$: Observable<number | number[]>;
   private interval: number;
 
   constructor(
@@ -66,7 +66,6 @@ export class WidgetComponent implements OnInit, OnDestroy {
             });
 
           this.value$ = this.valueGenerator;
-          // this.componentRef.instance.value = this.valueGenerator;
 
           const valueSubscription = this.value$.subscribe(
             (data: number | number[]) => {
@@ -86,8 +85,8 @@ export class WidgetComponent implements OnInit, OnDestroy {
       });
   }
 
-  get valueGenerator(): Observable<number | number[]> {
-    return Observable.create((observer: Observer<number | number[]>) => {
+  get valueGenerator(): Observable<WidgetData> {
+    return Observable.create((observer: Observer<WidgetData>) => {
       this.interval = window.setInterval(() => {
         observer.next(this.widget.valueGenerator());
       }, 10);

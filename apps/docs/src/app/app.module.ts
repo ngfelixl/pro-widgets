@@ -10,7 +10,8 @@ import {
   GaugeComponent,
   DigitalGaugeComponent,
   AnalogStickComponent,
-  LinearGaugeComponent
+  LinearGaugeComponent,
+  SpaceTrackerComponent
 } from '@pro-widgets';
 import { AppRoutingModule } from './app-routing.module';
 import { components } from './components';
@@ -38,7 +39,8 @@ import { AppComponent } from './app.component';
     GaugeComponent,
     DigitalGaugeComponent,
     AnalogStickComponent,
-    LinearGaugeComponent
+    LinearGaugeComponent,
+    SpaceTrackerComponent
   ]
 })
 export class AppModule {}

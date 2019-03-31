@@ -2,11 +2,12 @@ export interface Widgets {
   [id: string]: Widget;
 }
 
+export type WidgetData = number | number[] | { [id: string]: number[] };
 export interface Widget {
   name: string;
   component: any;
   module: string;
-  valueGenerator: () => number | number[];
+  valueGenerator: () => WidgetData;
   dataFieldName: string;
   tabs: Tab[];
 }
