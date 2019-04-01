@@ -5,7 +5,6 @@ import { ContributingComponent } from './contributing/contributing.component';
 import { NavListComponent } from './nav-list/nav-list.component';
 import { TitlebarComponent } from './titlebar/titlebar.component';
 import { FooterComponent } from './footer/footer.component';
-import { WidgetComponent } from './widget/widget.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
 export const components: any[] = [
@@ -16,6 +15,5 @@ export const components: any[] = [
   NavListComponent,
   TitlebarComponent,
   FooterComponent,
-  WidgetComponent,
   SidenavComponent
 ];

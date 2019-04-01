@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LayoutService } from '@docs/app/services/layout.service';
 
-import { widgets } from '../../data/widgets/index';
+import { widgets } from '@docs/app/widgets/data/widgets/index';
 
 @Component({
   selector: 'app-nav-list',
