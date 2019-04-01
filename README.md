@@ -1,7 +1,12 @@
 # Pro-Widgets
 
+<!-- prettier-ignore -->
 [![Build Status](https://travis-ci.org/ngfelixl/pro-widgets.svg?branch=master)](https://travis-ci.org/ngfelixl/pro-widgets)
 [![npm](https://img.shields.io/npm/v/pro-widgets.svg)](https://npmjs.com/package/pro-widgets)
+![npm](https://img.shields.io/npm/dt/pro-widgets.svg)
+![NPM](https://img.shields.io/npm/l/pro-widgets.svg)
+![GitHub repo size](https://img.shields.io/github/repo-size/ngfelixl/pro-widgets.svg)
+![Github code size](https://img.shields.io/github/languages/code-size/ngfelixl/pro-widgets.svg)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 Responsive and animated SVG widgets for Angular.
@@ -33,11 +38,11 @@ This is an Nrwl Nx workspace.
 
 ## Contributing
 
-Contributions in all forms are welcome. Widget ideas, feature requests, bug reports, all of them would
-be helpful.
+Contributions in all forms are welcome. Widget ideas, feature requests, bug reports, etc.
 
 ## Get in touch
 
+<!-- prettier-ignore -->
 [![twitter](https://img.shields.io/badge/twitter-%40ngfelixl-blue.svg?logo=twitter)](https://twitter.com/intent/follow?screen_name=ngfelixl)
 [![github](https://img.shields.io/badge/github-%40ngfelixl-blue.svg?logo=github)](https://github.com/ngfelixl)
 
