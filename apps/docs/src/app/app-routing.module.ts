@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { InstallationComponent } from './components/installation/installation.component';
 import { ContributingComponent } from './components/contributing/contributing.component';
-import { WidgetComponent } from './components/widget/widget.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, data: { hideSidenav: true } },
@@ -20,8 +19,8 @@ const routes: Routes = [
     data: { subtitle: 'Contributing' }
   },
   {
-    path: 'widgets/:id',
-    component: WidgetComponent,
+    path: 'widgets',
+    loadChildren: './widgets/widgets.module#WidgetsModule',
     data: { subtitle: 'Customizer' }
   },
   { path: 'page-not-found', component: PageNotFoundComponent },
@@ -29,7 +28,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

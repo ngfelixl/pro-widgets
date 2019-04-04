@@ -15,9 +15,9 @@ import { map, debounceTime } from 'rxjs/operators';
 import { widgets } from '../../data/widgets/index';
 import { themes } from '../../data/themes/index';
 
-import { DynamicFormsService } from '@docs/app/services/dynamic-forms.service';
+import { DynamicFormsService } from '../../services/dynamic-forms.service';
 import { Widget, Tab, WidgetData } from '@docs/app/models/widget';
-import { WidgetHostDirective } from '@docs/app/directive/widget-host.directive';
+import { WidgetHostDirective } from '../../directive/widget-host.directive';
 
 @Component({
   selector: 'app-widget',

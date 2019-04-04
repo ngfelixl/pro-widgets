@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class DynamicFormsService {
   createFromList(list: string[]): FormGroup {
     if (!(list instanceof Array)) {

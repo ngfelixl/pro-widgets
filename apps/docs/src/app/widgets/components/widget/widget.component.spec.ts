@@ -9,7 +9,7 @@ import {
 import { WidgetComponent } from './widget.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { WidgetHostDirective } from '@docs/app/directive/widget-host.directive';
+import { WidgetHostDirective } from '@docs/app/widgets/directive/widget-host.directive';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { skip } from 'rxjs/operators';
