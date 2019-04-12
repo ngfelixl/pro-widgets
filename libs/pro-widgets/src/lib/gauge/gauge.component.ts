@@ -13,8 +13,7 @@ import {
   scan,
   map,
   share,
-  audit,
-  startWith
+  audit
 } from 'rxjs/operators';
 
 @Component({
@@ -25,7 +24,7 @@ import {
 export class GaugeComponent implements OnInit, OnChanges, OnDestroy {
   @Input() min = 0;
   @Input() max = 100;
-  @Input() value: number;
+  @Input() value = 0;
   @Input() unit = '';
   @Input() color = '#474747';
   @Input() backgroundColor = '#0A0B14';
@@ -63,21 +62,25 @@ export class GaugeComponent implements OnInit, OnChanges, OnDestroy {
     );
     this.roundedValue$ = animationFrame$.pipe(
       map(value => Math.round(value * 10) / 10),
-      audit(() => interval(this.digitalDelay)),
-      startWith(0)
+      audit(() => interval(this.digitalDelay))
     );
     const smoothCoordinates$ = animationFrame$.pipe(
-      scan(this.linearInterpolation.bind(this)),
-      map<number, number[]>(this.coordinates.bind(this))
+      scan(this.linearInterpolation.bind(this), 0),
+      map<number, number[]>(this.coordinates.bind(this)),
+      share()
     );
-    this.smoothX$ = smoothCoordinates$.pipe(map(coordinates => coordinates[0]));
-    this.smoothY$ = smoothCoordinates$.pipe(map(coordinates => coordinates[1]));
+    this.smoothX$ = smoothCoordinates$.pipe(
+      map(coordinates => coordinates[0])
+    );
+    this.smoothY$ = smoothCoordinates$.pipe(
+      map(coordinates => coordinates[1])
+    );
   }
 
   ngOnChanges() {
     this.applyStyles();
 
-    if (isNaN(this.interpolationRate) || this.interpolationRate > 1) {
+    if (isNaN(this.interpolationRate) || this.interpolationRate < 0 || this.interpolationRate > 1) {
       this.interpolationRate = 0;
     }
   }

@@ -326,7 +326,7 @@
     />
     <rect x="111.347" y="205" fill="#9B9B9A" width="60.769" height="25.574" />
   </g>
-  <g id="zeiger">
+  <g id="pointer">
     <line
       fill="none"
       [attr.stroke]="pointerColor"
@@ -334,8 +334,8 @@
       stroke-miterlimit="10"
       x1="141.73"
       y1="141.73"
-      [attr.x2]="smoothX$ | async"
-      [attr.y2]="smoothY$ | async"
+      [attr.x2]="(smoothX$ | async) || 141.73"
+      [attr.y2]="(smoothY$ | async) || 141.73"
     />
     <circle [attr.fill]="pointerColor" cx="141.732" cy="141.731" r="7.086" />
     <text
